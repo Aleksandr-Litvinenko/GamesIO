@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const { SITE, UI, GAMES } = require('./src/content');
+const { SITE, UI, GAMES, SCRIPTS } = require('./src/content');
 const {
   hubPage,
   gamePage,
@@ -23,15 +23,6 @@ const {
 const root = __dirname;
 const docs = path.join(root, 'docs');
 const dist = path.join(root, 'dist');
-
-const SCRIPTS = [
-  'src/js/engine.js',
-  'src/js/games/arkanoid.js',
-  'src/js/games/snake.js',
-  'src/js/games/moto.js',
-  'src/js/ads.js',
-  'src/js/app.js',
-];
 
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const locales = Object.keys(SITE.locales);

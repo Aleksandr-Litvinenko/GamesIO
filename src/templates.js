@@ -1,6 +1,7 @@
 /* Шаблоны страниц. Чистые функции: получают данные из content.js и отдают HTML. */
 
-const { SITE, UI, CATEGORIES, GAMES } = require('./content');
+const path = require('path');
+const { SITE, UI, CATEGORIES, GAMES, SCRIPTS } = require('./content');
 
 const esc = (s) =>
   String(s)
@@ -133,12 +134,7 @@ ${o.body}
 
 ${adSlot('bottom', t)}
 
-<script src="${rel}assets/engine.js"></script>
-<script src="${rel}assets/arkanoid.js"></script>
-<script src="${rel}assets/snake.js"></script>
-<script src="${rel}assets/moto.js"></script>
-<script src="${rel}assets/ads.js"></script>
-<script src="${rel}assets/app.js"></script>
+${SCRIPTS.map((s) => `<script src="${rel}assets/${path.basename(s)}"></script>`).join('\n')}
 </body>
 </html>
 `;

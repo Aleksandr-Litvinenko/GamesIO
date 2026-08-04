@@ -84,6 +84,17 @@ const UI = {
       snakeLength: 'Длина змейки: {n}',
       roundsCleared: 'Пройдено раундов: {n}',
       perfectSnake: 'Поле заполнено — идеальная змейка!',
+      time: 'Время',
+      speed: 'Скорость',
+      lap: 'Круг',
+      overtakes: 'Обгоны',
+      checkpoint: 'КОНТРОЛЬНАЯ ТОЧКА',
+      distanceCovered: 'Пройдено {n} км',
+      playerN: 'ИГРОК {n}',
+      playerWins: 'ПОБЕДИЛ ИГРОК {n}',
+      go: 'СТАРТ',
+      p1: 'Игрок 1',
+      p2: 'Игрок 2',
     },
   },
   en: {
@@ -156,13 +167,40 @@ const UI = {
       snakeLength: 'Snake length: {n}',
       roundsCleared: 'Rounds cleared: {n}',
       perfectSnake: 'Grid filled — a perfect snake!',
+      time: 'Time',
+      speed: 'Speed',
+      lap: 'Lap',
+      overtakes: 'Overtakes',
+      checkpoint: 'CHECKPOINT',
+      distanceCovered: '{n} km covered',
+      playerN: 'PLAYER {n}',
+      playerWins: 'PLAYER {n} WINS',
+      go: 'GO',
+      p1: 'Player 1',
+      p2: 'Player 2',
     },
   },
 };
 
 const CATEGORIES = {
-  ru: { arcade: 'Аркада', classic: 'Классика', versus: 'Против ботов', retro: 'Ретро' },
-  en: { arcade: 'Arcade', classic: 'Classic', versus: 'Versus bots', retro: 'Retro' },
+  ru: {
+    arcade: 'Аркада',
+    classic: 'Классика',
+    versus: 'Против ботов',
+    retro: 'Ретро',
+    racing: 'Гонки',
+    pseudo3d: '3D',
+    twoPlayer: 'На двоих',
+  },
+  en: {
+    arcade: 'Arcade',
+    classic: 'Classic',
+    versus: 'Versus bots',
+    retro: 'Retro',
+    racing: 'Racing',
+    pseudo3d: '3D',
+    twoPlayer: 'Two players',
+  },
 };
 
 const GAMES = [
@@ -447,6 +485,308 @@ const GAMES = [
       ],
     },
   },
+  {
+    id: 'moto3d',
+    emoji: '🏁',
+    accent: '#22d3ee',
+    categories: ['racing', 'pseudo3d', 'arcade', 'retro'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Реальные мотоциклы',
+      slug: 'moto-3d',
+      short: 'Псевдо-3D гонка на байке: закат, трафик и таймер, который вечно кончается.',
+      metaTitle: 'Гонки на мотоцикле 3D — играть онлайн бесплатно | GamesIO',
+      metaDescription:
+        'Аркадная гонка на мотоцикле от третьего лица, как на автоматах Sega: закат, повороты, встречный трафик и контрольные точки, продлевающие время. Играть в браузере бесплатно.',
+      keywords: ['гонки на мотоцикле', 'мотогонки 3д', 'hang on игра', 'аркадные гонки онлайн', 'мотоцикл игра браузер'],
+      about: [
+        'В 1985 году Sega выпустила Hang-On — первую гонку, где мотоцикл нёсся навстречу горизонту, а игрок наклонялся вместе с корпусом автомата. Настоящей трёхмерной графики тогда не существовало: дорога собиралась из полос, которые быстро сменяли друг друга и создавали иллюзию скорости. Эта игра сделана тем же способом.',
+        'Трасса нарезана на сегменты, каждый рисуется как трапеция, и поворот — это не геометрия, а сдвиг каждого следующего сегмента вбок. Отсюда и характерная физика: на скорости в повороте вас выносит наружу, и удержать байк можно только заранее прижавшись к внутренней стороне. Съезд на обочину мгновенно съедает скорость, а таймер продлевается только на контрольных точках.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — наклон и руль',
+        '<kbd>↑</kbd> или <kbd>Пробел</kbd> — газ, <kbd>↓</kbd> — тормоз',
+        'Касание экрана — газ, движение пальцем влево-вправо — руль',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+      ],
+      tips: [
+        'В повороте прижимайтесь к внутренней стороне заранее: центробежная сила растёт вместе со скоростью, и на максимуме вас вынесет с полотна.',
+        'Тормоз почти не нужен. Быстрее объехать машину, чем оттормаживаться — потерянную скорость набирать долго.',
+        'Обочина отнимает скорость только выше трети от максимума. На медленном ходу по ней можно спрямить поворот.',
+        'Контрольная точка даёт +22 секунды. Их четыре на круг, так что цель — не проехать красиво, а успеть до следующей.',
+        'Грузовики шире легковушек и едут медленнее — самый опасный тип трафика в слепом повороте.',
+      ],
+      faq: [
+        {
+          q: 'Это настоящая 3D-графика?',
+          a: 'Нет, и в оригинальных автоматах Sega её тоже не было. Дорога собирается из плоских сегментов, которые проецируются на экран — приём называется псевдо-3D. Поэтому игра работает без WebGL и грузится мгновенно.',
+        },
+        {
+          q: 'Что даёт контрольная точка?',
+          a: 'Плюс 22 секунды к таймеру и 200 очков. Отметки расставлены через каждую четверть круга — игра на время, а не на количество кругов.',
+        },
+        {
+          q: 'Почему мотоцикл сносит в поворотах?',
+          a: 'Это центробежная сила: она пропорциональна крутизне поворота и квадрату скорости. Чем быстрее вы едете, тем раньше нужно начинать вход в поворот.',
+        },
+        {
+          q: 'Можно ли играть с телефона?',
+          a: 'Да. Касание верхней части экрана — газ, нижней — тормоз, а движение пальцем влево-вправо управляет рулём.',
+        },
+      ],
+    },
+    en: {
+      title: 'Motorbike Rush',
+      slug: 'motorbike-3d',
+      short: 'Pseudo-3D bike racing: sunset, traffic and a timer that never lasts.',
+      metaTitle: 'Motorbike Racing 3D — play online free | GamesIO',
+      metaDescription:
+        'Arcade third-person motorbike racing in the style of classic Sega cabinets: sunset road, curves, oncoming traffic and checkpoints that extend the clock. Play free in your browser.',
+      keywords: ['motorbike racing game', 'hang on game', 'arcade racing online', '3d bike game', 'retro racing game'],
+      about: [
+        'In 1985 Sega released Hang-On, the first racer where the bike tore toward the horizon while the player leaned with the cabinet itself. Real 3D graphics did not exist yet: the road was assembled from bands that swapped quickly enough to sell the illusion of speed. This game is built the same way.',
+        'The track is cut into segments, each drawn as a trapezoid, and a corner is not geometry but a sideways shift applied to every following segment. That is where the handling comes from: speed in a corner throws you outward, and the only way to hold the bike is to hug the inside early. Running onto the shoulder eats your speed instantly, and the clock only extends at checkpoints.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — lean and steer',
+        '<kbd>↑</kbd> or <kbd>Space</kbd> — throttle, <kbd>↓</kbd> — brake',
+        'Touch the screen for throttle, slide left/right to steer',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+      ],
+      tips: [
+        'Hug the inside of a corner before you reach it: centrifugal force scales with speed, and at the top end it will throw you off the tarmac.',
+        'You rarely need the brake. Steering around a car is faster than slowing down, because lost speed takes a long time to rebuild.',
+        'The shoulder only drains speed above a third of maximum, so at low speed you can cut a corner across it.',
+        'A checkpoint pays +22 seconds. There are four per lap, so the goal is not a clean lap — it is reaching the next gate.',
+        'Trucks are wider and slower than cars, which makes them the most dangerous traffic to meet in a blind corner.',
+      ],
+      faq: [
+        {
+          q: 'Is this real 3D graphics?',
+          a: 'No, and the original Sega cabinets did not have it either. The road is built from flat segments projected onto the screen — a technique called pseudo-3D. That is why the game needs no WebGL and loads instantly.',
+        },
+        {
+          q: 'What does a checkpoint do?',
+          a: 'It adds 22 seconds to the clock and 200 points. Gates sit every quarter lap, so this is a time attack rather than a lap race.',
+        },
+        {
+          q: 'Why does the bike slide wide in corners?',
+          a: 'That is centrifugal force, proportional to how tight the corner is and to your speed. The faster you go, the earlier you have to start turning in.',
+        },
+        {
+          q: 'Can I play on a phone?',
+          a: 'Yes. Touching the upper part of the screen is throttle, the lower part is brake, and sliding your finger left or right steers.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'cars3d',
+    emoji: '🚗',
+    accent: '#fbbf24',
+    categories: ['racing', 'pseudo3d', 'arcade', 'retro'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Реальные тачки',
+      slug: 'tachki-3d',
+      short: 'Псевдо-3D гонка на машине вдоль побережья: четыре полосы, пальмы, плотный трафик.',
+      metaTitle: 'Гонки на машине 3D — играть онлайн бесплатно, как OutRun | GamesIO',
+      metaDescription:
+        'Аркадная автогонка в стиле OutRun: побережье, пальмы, четыре полосы движения и контрольные точки. Машина тяжелее байка и держит дорогу лучше. Играть в браузере бесплатно.',
+      keywords: ['гонки на машине', 'outrun игра', 'аркадные гонки 3д', 'гонки онлайн бесплатно', 'ретро гонки браузер'],
+      about: [
+        'OutRun вышел в 1986 году и задал жанру тон на десятилетие вперёд: не спорт, а поездка вдоль моря на скорости, к которой не готова ни одна встречная машина. Здесь та же идея — широкая дорога в четыре полосы, пальмы вдоль обочины и таймер, который держит вас в напряжении.',
+        'Машина ведёт себя иначе, чем мотоцикл из соседней игры: руль медленнее, зато центробежная сила слабее, а запас скорости выше. Это меняет тактику — вместо резких объездов выгоднее заранее выбрать полосу и держать её, потому что перестроение на четырёхполосной дороге стоит дороже, чем на трёхполосной.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — руль',
+        '<kbd>↑</kbd> или <kbd>Пробел</kbd> — газ, <kbd>↓</kbd> — тормоз',
+        'Касание экрана — газ, движение пальцем влево-вправо — руль',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+      ],
+      tips: [
+        'Выбирайте полосу заранее и держитесь её: на четырёх полосах перестроение стоит дороже, чем на трёх.',
+        'Внутренняя сторона поворота короче — на длинной дуге это заметная экономия времени.',
+        'Каждый обгон даёт 50 очков, поэтому в плотном трафике выгоднее не оттормаживаться, а искать просвет.',
+        'Машина держит дорогу лучше байка, но и разгоняется дольше. Потерянные 100 км/ч возвращаются секунды три.',
+        'Контрольные точки стоят через каждую четверть круга и дают +24 секунды. Ведите отсчёт от них, а не от круга.',
+      ],
+      faq: [
+        {
+          q: 'Чем эта игра отличается от «Реальных мотоциклов»?',
+          a: 'Шире дорога (четыре полосы вместо трёх), выше максимальная скорость, медленнее руль и слабее снос в поворотах. Плюс другая трасса и другое окружение — побережье вместо горного заката.',
+        },
+        {
+          q: 'Сколько всего трасс?',
+          a: 'Трасса одна, но замкнутая в кольцо и достаточно длинная, чтобы за один заход её целиком не запомнить. Каждый следующий круг даёт 500 очков.',
+        },
+        {
+          q: 'Как начисляются очки?',
+          a: 'Постоянно за скорость, плюс 50 за каждый обгон, 200 за контрольную точку и 500 за круг. Гонять медленно и аккуратно невыгодно.',
+        },
+        {
+          q: 'Игра работает на слабом устройстве?',
+          a: 'Да. Вся отрисовка — плоские трапеции на обычном 2D-канвасе, без WebGL, шейдеров и загрузки текстур.',
+        },
+      ],
+    },
+    en: {
+      title: 'Coast Runner',
+      slug: 'coast-runner',
+      short: 'Pseudo-3D coastal car racing: four lanes, palm trees and heavy traffic.',
+      metaTitle: 'Car Racing 3D — play OutRun-style online free | GamesIO',
+      metaDescription:
+        'Arcade car racing in the style of OutRun: coastline, palm trees, four lanes of traffic and checkpoints. The car is heavier than the bike and holds the road better. Play free in your browser.',
+      keywords: ['car racing game', 'outrun game online', 'arcade racing 3d', 'retro racing browser', 'free driving game'],
+      about: [
+        'OutRun arrived in 1986 and set the tone for a decade: not a sport, but a drive along the sea at a speed no oncoming car is ready for. Same idea here — a wide four-lane road, palm trees on the shoulder and a clock that keeps the pressure on.',
+        'The car behaves differently from the bike in the neighbouring game: the steering is slower, but centrifugal force is weaker and the top end is higher. That changes the tactics — instead of darting between cars it pays to pick a lane early and hold it, because changing lanes on a four-lane road costs more than on three.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — steer',
+        '<kbd>↑</kbd> or <kbd>Space</kbd> — throttle, <kbd>↓</kbd> — brake',
+        'Touch the screen for throttle, slide left/right to steer',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+      ],
+      tips: [
+        'Pick your lane early and stay in it: on four lanes a lane change costs more than on three.',
+        'The inside of a corner is the shorter line, and over a long sweeper that adds up to real time.',
+        'Every overtake pays 50 points, so in heavy traffic it is better to find a gap than to lift off.',
+        'The car grips better than the bike but also builds speed slower. Losing 100 km/h costs you about three seconds.',
+        'Checkpoints sit every quarter lap and add 24 seconds. Count from gate to gate, not lap to lap.',
+      ],
+      faq: [
+        {
+          q: 'How is this different from Motorbike Rush?',
+          a: 'Wider road (four lanes instead of three), higher top speed, slower steering and less slide in corners. It also has its own track and setting — a coastline instead of a mountain sunset.',
+        },
+        {
+          q: 'How many tracks are there?',
+          a: 'One track, but it loops and is long enough that you will not memorise it in a single run. Each completed lap pays 500 points.',
+        },
+        {
+          q: 'How is the score calculated?',
+          a: 'Continuously from your speed, plus 50 per overtake, 200 per checkpoint and 500 per lap. Driving slowly and safely does not pay.',
+        },
+        {
+          q: 'Will it run on a weak device?',
+          a: 'Yes. Everything is drawn as flat trapezoids on a plain 2D canvas — no WebGL, no shaders, no texture loading.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'duel3d',
+    emoji: '🏎️',
+    accent: '#f472b6',
+    categories: ['racing', 'pseudo3d', 'twoPlayer', 'arcade'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Дуэль на двоих',
+      slug: 'duel-na-dvoih',
+      short: 'Разделённый экран, одна трасса, три круга. Соперника видно впереди — и его можно подрезать.',
+      metaTitle: 'Игра на двоих 3D — гонка на одной клавиатуре бесплатно | GamesIO',
+      metaDescription:
+        'Псевдо-3D гонка на двоих за одной клавиатурой: разделённый экран, общая трасса, три круга. Первый игрок — WASD, второй — стрелки. Играть в браузере бесплатно.',
+      keywords: ['игры на двоих', 'гонки на двоих', 'игра на одной клавиатуре', 'сплит скрин гонки', 'игры на двоих онлайн'],
+      about: [
+        'Гонка на разделённом экране — жанр, который почти исчез из браузера вместе с локальным мультиплеером. Здесь он в чистом виде: два игрока за одной клавиатурой, одна трасса на двоих, три круга и никакого интернета.',
+        'Важная деталь: соперник не нарисован отдельно в каждом виде, а живёт на трассе как объект. Поэтому если он едет впереди, вы видите его машину на дороге — в неё можно врезаться, её можно подрезать и ею можно закрыть проезд в повороте. Это превращает гонку в контактную борьбу, а не в две параллельные поездки.',
+      ],
+      controls: [
+        'Игрок 1: <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> — газ, руль, тормоз',
+        'Игрок 2: <kbd>↑</kbd> <kbd>←</kbd> <kbd>↓</kbd> <kbd>→</kbd> — газ, руль, тормоз',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+        'Нужна клавиатура: на телефоне вдвоём не сыграть',
+      ],
+      tips: [
+        'Идущий вторым видит соперника впереди — этим стоит пользоваться: держитесь за ним и уходите в сторону только на выходе из поворота.',
+        'Лидеру выгодно занимать внутреннюю сторону поворота: он и короче, и закрывает сопернику удобную траекторию.',
+        'Столкновение сбрасывает скорость обоим, но отбрасывает того, кто ехал быстрее. Таранить лидера сзади невыгодно.',
+        'Три круга — дистанция, на которой одна ошибка ещё отыгрывается. Не рискуйте на первом.',
+        'Съезд на обочину отнимает скорость только на быстром ходу, поэтому спрямлять углы на выходе из поворота иногда выгодно.',
+      ],
+      faq: [
+        {
+          q: 'Можно играть по сети?',
+          a: 'Нет, это локальная игра за одной клавиатурой. Никакого сервера у сайта нет, всё работает прямо в браузере.',
+        },
+        {
+          q: 'Кто побеждает?',
+          a: 'Тот, кто первым закончит три круга. Итог показывается на весь экран, после чего партию можно начать заново.',
+        },
+        {
+          q: 'Клавиши не мешают друг другу?',
+          a: 'Первый игрок использует WASD, второй — стрелки, эти блоки на большинстве клавиатур обрабатываются независимо. На дешёвых мембранных клавиатурах при трёх одновременных нажатиях возможны пропуски — это ограничение железа.',
+        },
+        {
+          q: 'Можно ли сыграть одному?',
+          a: 'Технически да — вторая машина просто останется на старте. Но игра рассчитана на двоих; для одиночной гонки есть «Реальные тачки» и «Реальные мотоциклы».',
+        },
+      ],
+    },
+    en: {
+      title: 'Split Duel',
+      slug: 'split-duel',
+      short: 'Split screen, one track, three laps. You can see your rival ahead — and cut him off.',
+      metaTitle: 'Two Player Game 3D — split-screen race on one keyboard | GamesIO',
+      metaDescription:
+        'Pseudo-3D two player racing on a single keyboard: split screen, shared track, three laps. Player one uses WASD, player two the arrow keys. Play free in your browser.',
+      keywords: ['two player games', '2 player racing', 'split screen game', 'same keyboard game', 'local multiplayer browser'],
+      about: [
+        'Split-screen racing is a genre that all but vanished from the browser along with local multiplayer. Here it is in its purest form: two players on one keyboard, one shared track, three laps and no internet involved.',
+        'One detail matters: the rival is not drawn separately in each view — he exists on the track as an object. So when he is ahead, you see his actual car on the road. You can hit it, cut him off, and block the racing line through a corner. That turns the race into contact fighting rather than two parallel drives.',
+      ],
+      controls: [
+        'Player 1: <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> — throttle, steer, brake',
+        'Player 2: <kbd>↑</kbd> <kbd>←</kbd> <kbd>↓</kbd> <kbd>→</kbd> — throttle, steer, brake',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+        'Keyboard required: two people cannot share a phone screen',
+      ],
+      tips: [
+        'Running second means you can see your rival — use it. Sit behind him and only pull out on corner exit.',
+        'The leader should take the inside line: it is shorter and it denies the rival the comfortable trajectory.',
+        'A collision costs both of you speed but throws off whoever was going faster. Ramming the leader from behind does not pay.',
+        'Three laps is long enough to recover from one mistake, so do not take risks on the first.',
+        'The shoulder only drains speed at high pace, so straightening a corner exit across it is sometimes worth it.',
+      ],
+      faq: [
+        {
+          q: 'Can we play over the internet?',
+          a: 'No, this is local play on one keyboard. The site has no server at all — everything runs in your browser.',
+        },
+        {
+          q: 'Who wins?',
+          a: 'Whoever completes three laps first. The result is shown full screen, and you can restart the race from there.',
+        },
+        {
+          q: 'Do the two key sets interfere?',
+          a: 'Player one uses WASD and player two the arrows; on most keyboards these blocks register independently. Cheap membrane keyboards can drop a third simultaneous key — that is a hardware limit, not the game.',
+        },
+        {
+          q: 'Can I play alone?',
+          a: 'Technically yes — the second car simply stays on the grid. But the game is built for two; for solo racing try Coast Runner or Motorbike Rush.',
+        },
+      ],
+    },
+  },
 ];
 
-module.exports = { SITE, UI, CATEGORIES, GAMES };
+/* Скрипты страницы. Порядок важен: движок, общие библиотеки, игры, оболочка.
+   Один список на генератор страниц и на однофайловую сборку — чтобы при
+   добавлении игры не пришлось помнить про два места. */
+const SCRIPTS = [
+  'src/js/engine.js',
+  'src/js/lib/road.js',
+  'src/js/lib/racer.js',
+  'src/js/games/arkanoid.js',
+  'src/js/games/snake.js',
+  'src/js/games/moto.js',
+  'src/js/games/moto3d.js',
+  'src/js/games/cars3d.js',
+  'src/js/games/duel3d.js',
+  'src/js/ads.js',
+  'src/js/app.js',
+];
+
+module.exports = { SITE, UI, CATEGORIES, GAMES, SCRIPTS };

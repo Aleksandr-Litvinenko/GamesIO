@@ -34,6 +34,30 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
   </url>
   <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/tachki-3d/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/split-duel/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/split-duel/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/duel-na-dvoih/"/>
+  </url>
+  <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -64,5 +88,29 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/tachki-3d/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/tachki-3d/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/duel-na-dvoih/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/split-duel/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/duel-na-dvoih/"/>
   </url>
 </urlset>

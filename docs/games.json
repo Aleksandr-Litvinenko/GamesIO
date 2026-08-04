@@ -110,6 +110,117 @@
           ]
         }
       }
+    },
+    {
+      "id": "moto3d",
+      "emoji": "🏁",
+      "categories": [
+        "racing",
+        "pseudo3d",
+        "arcade",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Motorbike Rush",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/",
+          "summary": "Pseudo-3D bike racing: sunset, traffic and a timer that never lasts.",
+          "keywords": [
+            "motorbike racing game",
+            "hang on game",
+            "arcade racing online",
+            "3d bike game",
+            "retro racing game"
+          ]
+        },
+        "ru": {
+          "title": "Реальные мотоциклы",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/",
+          "summary": "Псевдо-3D гонка на байке: закат, трафик и таймер, который вечно кончается.",
+          "keywords": [
+            "гонки на мотоцикле",
+            "мотогонки 3д",
+            "hang on игра",
+            "аркадные гонки онлайн",
+            "мотоцикл игра браузер"
+          ]
+        }
+      }
+    },
+    {
+      "id": "cars3d",
+      "emoji": "🚗",
+      "categories": [
+        "racing",
+        "pseudo3d",
+        "arcade",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Coast Runner",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/",
+          "summary": "Pseudo-3D coastal car racing: four lanes, palm trees and heavy traffic.",
+          "keywords": [
+            "car racing game",
+            "outrun game online",
+            "arcade racing 3d",
+            "retro racing browser",
+            "free driving game"
+          ]
+        },
+        "ru": {
+          "title": "Реальные тачки",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/tachki-3d/",
+          "summary": "Псевдо-3D гонка на машине вдоль побережья: четыре полосы, пальмы, плотный трафик.",
+          "keywords": [
+            "гонки на машине",
+            "outrun игра",
+            "аркадные гонки 3д",
+            "гонки онлайн бесплатно",
+            "ретро гонки браузер"
+          ]
+        }
+      }
+    },
+    {
+      "id": "duel3d",
+      "emoji": "🏎️",
+      "categories": [
+        "racing",
+        "pseudo3d",
+        "twoPlayer",
+        "arcade"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Split Duel",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/split-duel/",
+          "summary": "Split screen, one track, three laps. You can see your rival ahead — and cut him off.",
+          "keywords": [
+            "two player games",
+            "2 player racing",
+            "split screen game",
+            "same keyboard game",
+            "local multiplayer browser"
+          ]
+        },
+        "ru": {
+          "title": "Дуэль на двоих",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/duel-na-dvoih/",
+          "summary": "Разделённый экран, одна трасса, три круга. Соперника видно впереди — и его можно подрезать.",
+          "keywords": [
+            "игры на двоих",
+            "гонки на двоих",
+            "игра на одной клавиатуре",
+            "сплит скрин гонки",
+            "игры на двоих онлайн"
+          ]
+        }
+      }
     }
   ]
 }

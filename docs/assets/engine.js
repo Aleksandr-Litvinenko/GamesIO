@@ -40,6 +40,17 @@
     snakeLength: 'Snake length: {n}',
     roundsCleared: 'Rounds cleared: {n}',
     perfectSnake: 'Grid filled — a perfect snake!',
+    time: 'Time',
+    speed: 'Speed',
+    lap: 'Lap',
+    overtakes: 'Overtakes',
+    checkpoint: 'CHECKPOINT',
+    distanceCovered: '{n} km covered',
+    playerN: 'PLAYER {n}',
+    playerWins: 'PLAYER {n} WINS',
+    go: 'GO',
+    p1: 'Player 1',
+    p2: 'Player 2',
   };
 
   Arcade.t = function (key, params) {
@@ -299,6 +310,9 @@
 
       this.keys = new Set();
       this.just = new Set();
+      // «Сырые» коды клавиш нужны игре на двоих: там WASD и стрелки должны
+      // управлять разными игроками, а обычный keys их объединяет.
+      this.raw = new Set();
       this.pointer = { x: this.W / 2, y: this.H / 2, down: false, active: false };
       this.taps = [];
       this.swipes = [];
@@ -355,6 +369,7 @@
       this.shakeAmount = 0;
       this.fx.clear();
       this.keys.clear();
+      this.raw.clear();
       this.just.clear();
       this.taps.length = 0;
       this.swipes.length = 0;
@@ -412,6 +427,9 @@
     }
     pressed(action) {
       return this.just.has(action);
+    }
+    rawHeld(code) {
+      return this.raw.has(code);
     }
 
     gameOver(payload) {
@@ -548,6 +566,7 @@
       this.onKeyDown = (e) => {
         const action = actionFor(e);
         if (BLOCK_SCROLL.has(e.code)) e.preventDefault();
+        if (e.code) this.raw.add(e.code);
         if (!action) return;
         if (action === 'pause') {
           if (!e.repeat) this.togglePause();
@@ -567,11 +586,13 @@
 
       this.onKeyUp = (e) => {
         const action = actionFor(e);
+        if (e.code) this.raw.delete(e.code);
         if (action) this.keys.delete(action);
       };
 
       this.onBlur = () => {
         this.keys.clear();
+        this.raw.clear();
         this.pause();
       };
 
@@ -655,6 +676,7 @@
       pointer: { x: def.width / 2, y: def.height / 2, down: false, active: false },
       keys: new Set(),
       just: new Set(),
+      raw: new Set(),
       taps: [],
       swipes: [],
       fx: new Particles(),
@@ -664,6 +686,7 @@
       shake: noop,
       held: () => false,
       pressed: () => false,
+      rawHeld: () => false,
       gameOver: () => {
         host.state = 'over';
         host.restartIn = 1.2;
