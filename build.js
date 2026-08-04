@@ -10,7 +10,15 @@ const fs = require('fs');
 const path = require('path');
 
 const { SITE, UI, GAMES } = require('./src/content');
-const { hubPage, gamePage, hubPath, gamePath, absolute } = require('./src/templates');
+const {
+  hubPage,
+  gamePage,
+  bundleStage,
+  runtimeConfig,
+  hubPath,
+  gamePath,
+  absolute,
+} = require('./src/templates');
 
 const root = __dirname;
 const docs = path.join(root, 'docs');
@@ -232,13 +240,17 @@ const bodyMatch = bundleHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
 const bodyInner = bodyMatch[1]
   .replace(/\s*<script src="[^"]+"><\/script>/g, '')
   .replace(/<link rel="stylesheet"[^>]*>/g, '')
-  // в одном файле относительных страниц нет — уводим ссылки на живой сайт
+  // Отдельных страниц в одном файле нет: игра открывается прямо на витрине,
+  // а href остаётся ссылкой на живой сайт — для краулеров и как запасной путь.
+  .replace('</main>', bundleStage(bundleLocale) + '\n</main>')
   .replace(/href="\.\/(?!#)/g, `href="${SITE.url}/`)
   .replace(/href="\.\/#/g, `href="${SITE.url}/#`)
   .trim();
 
-const runtimeMatch = bundleHtml.match(/<script>window\.GAMESIO=([\s\S]*?)<\/script>/);
-const runtime = runtimeMatch ? runtimeMatch[1] : '{}';
+// hub: '#' — в одном файле возврат в каталог обрабатывает скрипт, а не переход
+const runtime = JSON.stringify(
+  Object.assign(runtimeConfig(bundleLocale, './'), { hub: '#', bundle: true })
+);
 
 const bundle = `<style>\n${css}\n</style>\n\n${bodyInner}\n\n<script>window.GAMESIO=${runtime}</script>\n<script>\n${js}\n</script>\n`;
 

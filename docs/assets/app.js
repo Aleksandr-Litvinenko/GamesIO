@@ -21,40 +21,47 @@
     paint();
   }
 
-  /* ---------------- страница игры ---------------- */
+  /* ---------------- запуск игры ---------------- */
 
-  const gameId = document.body.dataset.game;
-  if (gameId) {
+  // Один и тот же код обслуживает отдельную страницу игры и однофайловую
+  // сборку, где игра открывается прямо на витрине.
+  function mountGame(gameId) {
     const def = Arcade.get(gameId);
     const canvas = el('canvas');
-    if (def && canvas) {
-      el('stage').style.setProperty('--ratio', def.width + ' / ' + def.height);
+    if (!def || !canvas) return null;
 
-      const host = new Arcade.Host(def, {
-        canvas: canvas,
-        overlay: el('overlay'),
-        hud: el('hud'),
-      });
-      host.mount();
-      Arcade.currentHost = host;
+    el('stage').style.setProperty('--ratio', def.width + ' / ' + def.height);
 
-      el('overlay').addEventListener('click', (e) => {
-        const btn = e.target.closest('button[data-act]');
-        if (!btn) return;
-        const act = btn.dataset.act;
-        if (act === 'play') host.play();
-        else if (act === 'resume') host.togglePause();
-        else if (act === 'restart') {
-          host.reset();
-          host.play();
-        }
-      });
-      el('pause').addEventListener('click', () => host.togglePause());
-      el('restart').addEventListener('click', () => {
+    const host = new Arcade.Host(def, {
+      canvas: canvas,
+      overlay: el('overlay'),
+      hud: el('hud'),
+    });
+    host.mount();
+    Arcade.currentHost = host;
+
+    el('overlay').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-act]');
+      if (!btn) return;
+      const act = btn.dataset.act;
+      if (act === 'play') host.play();
+      else if (act === 'resume') host.togglePause();
+      else if (act === 'restart') {
         host.reset();
         host.play();
-      });
-    }
+      }
+    });
+    el('pause').addEventListener('click', () => host.togglePause());
+    el('restart').addEventListener('click', () => {
+      host.reset();
+      host.play();
+    });
+    return host;
+  }
+
+  const pageGame = document.body.dataset.game;
+  if (pageGame) {
+    mountGame(pageGame);
     return;
   }
 
@@ -148,5 +155,54 @@
       chips.forEach((c) => c.classList.toggle('is-on', c === chip));
       applyFilter();
     });
+  });
+
+  /* ---------------- однофайловая сборка ---------------- */
+
+  const bundleStage = el('bundle-stage');
+  if (!bundleStage) return;
+
+  const hero = document.querySelector('.hero');
+  const catalog = el('catalog');
+  let bundleHost = null;
+
+  function closeGame() {
+    if (bundleHost) {
+      bundleHost.unmount();
+      bundleHost = null;
+    }
+    bundleStage.hidden = true;
+    if (hero) hero.hidden = false;
+    catalog.hidden = false;
+    onScreen.forEach((p) => p.start());
+  }
+
+  function openGame(id) {
+    previews.forEach((p) => p.stop());
+    if (hero) hero.hidden = true;
+    catalog.hidden = true;
+    bundleStage.hidden = false;
+    bundleStage.style.setProperty('--accent', (Arcade.meta(id) || {}).accent || '#22d3ee');
+    if (bundleHost) bundleHost.unmount();
+    bundleHost = mountGame(id);
+    window.scrollTo(0, 0);
+  }
+
+  grid.addEventListener('click', (e) => {
+    const link = e.target.closest('.card-link');
+    if (!link) return;
+    const cv = link.querySelector('canvas[data-game]');
+    if (!cv) return;
+    e.preventDefault();
+    openGame(cv.dataset.game);
+  });
+
+  el('bundle-back').addEventListener('click', closeGame);
+  // «В меню» внутри оверлея игры
+  el('overlay').addEventListener('click', (e) => {
+    if (e.target.closest('a.btn')) {
+      e.preventDefault();
+      closeGame();
+    }
   });
 })();

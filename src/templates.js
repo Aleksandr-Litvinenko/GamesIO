@@ -440,4 +440,40 @@ function gamePage(locale, game) {
   });
 }
 
-module.exports = { layout, hubPage, gamePage, hubPath, gamePath, absolute, esc };
+/* ------------------------------------------------------------------ *
+ * Однофайловая сборка
+ * ------------------------------------------------------------------ */
+
+/* В одном файле отдельных страниц нет, поэтому игра открывается прямо на
+   витрине: этот блок скрыт, пока не выбрана карточка. */
+function bundleStage(locale) {
+  const t = UI[locale];
+  return `
+<div class="shell game-wrap" id="bundle-stage" hidden>
+  <div class="game-col">
+    <div class="playbar">
+      <button class="icon-btn" id="bundle-back" type="button">${esc(t.backToCatalog)}</button>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="restart" type="button">${esc(t.restart)}</button>
+      <button class="icon-btn" id="pause" type="button">${esc(t.pause)}</button>
+    </div>
+    <div class="hud" id="hud"></div>
+    <div class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div class="overlay" id="overlay"></div>
+    </div>
+  </div>
+</div>`;
+}
+
+module.exports = {
+  layout,
+  hubPage,
+  gamePage,
+  bundleStage,
+  runtimeConfig,
+  hubPath,
+  gamePath,
+  absolute,
+  esc,
+};
