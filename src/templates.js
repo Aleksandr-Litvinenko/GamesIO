@@ -76,6 +76,8 @@ function layout(o) {
   <meta name="twitter:image" content="${esc(absolute(o.image || 'og/cover.png'))}">
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+  <link rel="manifest" href="${rel}manifest.webmanifest">
+  <link rel="apple-touch-icon" href="${rel}og/icon-192.png">
   <link rel="stylesheet" href="${rel}assets/styles.css">
   <script type="application/ld+json">${JSON.stringify(o.jsonLd)}</script>
   <script>window.GAMESIO=${JSON.stringify(runtimeConfig(o.locale, rel))}</script>
@@ -95,6 +97,8 @@ function layout(o) {
     </nav>
     <div class="head-actions">
       <a class="lang-switch" href="${rel}${o.alternates[o.locale === 'ru' ? 'en' : 'ru']}" hreflang="${o.locale === 'ru' ? 'en' : 'ru'}" rel="alternate">${esc(t.langSwitch)}</a>
+      <span class="offline-badge" id="offline-badge" hidden>⚡ ${esc(t.offlineBadge)}</span>
+      <button class="icon-btn profile-chip" id="profile-chip" type="button"></button>
       <button class="icon-btn" id="mute" type="button" aria-label="${esc(t.sound)}">🔊</button>
     </div>
   </div>
@@ -134,6 +138,14 @@ ${o.body}
 
 ${adSlot('bottom', t)}
 
+<dialog class="sheet" id="profile-dialog">
+  <form method="dialog" class="sheet-head">
+    <h2>${esc(t.profile)}</h2>
+    <button class="icon-btn" value="close" aria-label="✕">✕</button>
+  </form>
+  <div data-slot="body"></div>
+</dialog>
+
 ${SCRIPTS.map((s) => `<script src="${rel}assets/${path.basename(s)}"></script>`).join('\n')}
 </body>
 </html>
@@ -147,6 +159,10 @@ function runtimeConfig(locale, rel) {
   return {
     locale,
     hub: rel + hubPath(locale),
+    swUrl: rel + 'sw.js',
+    scope: rel,
+    dataUrl: rel + 'data/',
+    repo: SITE.repo,
     t: t.game,
     games: Object.fromEntries(
       GAMES.map((g) => [
@@ -327,6 +343,16 @@ function gamePage(locale, game) {
 
   <aside class="game-side">
     ${adSlot('side', t).replace('<div class="shell">', '<div>')}
+    <section class="side-card" id="leaderboard">
+      <h2>${esc(t.leaderboard)}</h2>
+      <div class="tabs" role="tablist">
+        <button type="button" class="tab is-on" data-tab="local">${esc(t.tabLocal)}</button>
+        <button type="button" class="tab" data-tab="global">${esc(t.tabGlobal)}</button>
+      </div>
+      <div data-pane="local"></div>
+      <div data-pane="global" hidden></div>
+    </section>
+
     <section class="side-card">
       <h2>${esc(t.tips)}</h2>
       <ul class="tips">${c.tips.map((x) => `<li>${x}</li>`).join('\n        ')}</ul>

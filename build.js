@@ -8,6 +8,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const { SITE, UI, GAMES, SCRIPTS } = require('./src/content');
 const {
@@ -78,6 +79,70 @@ for (const s of SCRIPTS) {
 
 // Jekyll на Pages не нужен и мешает файлам, начинающимся с подчёркивания
 write('.nojekyll', '');
+
+/* ------------------------------------------------------------------ *
+ * Офлайн: манифест и service worker
+ * ------------------------------------------------------------------ */
+
+write(
+  'manifest.webmanifest',
+  JSON.stringify(
+    {
+      name: SITE.name + ' — mini-games',
+      short_name: SITE.name,
+      description: UI[SITE.defaultLocale].siteDescription,
+      // Точка входа и scope — относительные: сайт живёт в подпапке Pages
+      start_url: './',
+      scope: './',
+      display: 'standalone',
+      orientation: 'any',
+      background_color: '#05060d',
+      theme_color: '#05060d',
+      categories: ['games', 'entertainment'],
+      icons: [
+        { src: './og/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+        { src: './og/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+        { src: './og/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+      ],
+    },
+    null,
+    2
+  )
+);
+
+// Пустая таблица лидеров: её пересобирает GitHub Action из issue с меткой score
+const boardPath = path.join(docs, 'data', 'leaderboard.json');
+if (!fs.existsSync(boardPath)) {
+  write('data/leaderboard.json', JSON.stringify({ updated: null, games: {} }, null, 2));
+}
+
+/* В service worker подставляем полный список файлов сайта и версию.
+   Версия — хеш содержимого, поэтому кеш обновляется ровно тогда,
+   когда что-то действительно изменилось. */
+const offlineAssets = [
+  './',
+  ...pages.filter((p) => p.path).map((p) => './' + p.path),
+  './manifest.webmanifest',
+  './data/leaderboard.json',
+  './assets/styles.css',
+  ...SCRIPTS.map((s) => './assets/' + path.basename(s)),
+  ...(fs.existsSync(path.join(docs, 'og'))
+    ? fs.readdirSync(path.join(docs, 'og')).map((f) => './og/' + f)
+    : []),
+];
+
+const fingerprint = crypto
+  .createHash('sha1')
+  .update(read('src/styles.css') + SCRIPTS.map(read).join('') + offlineAssets.join(','))
+  .digest('hex')
+  .slice(0, 10);
+
+write(
+  'sw.js',
+  read('src/sw.js')
+    .replace('__VERSION__', fingerprint)
+    .replace('__ASSETS__', JSON.stringify(offlineAssets, null, 2))
+);
 
 /* ------------------------------------------------------------------ *
  * Файлы для поисковых систем и AI-краулеров

@@ -112,6 +112,42 @@
       }
     },
     {
+      "id": "planes",
+      "emoji": "✈️",
+      "categories": [
+        "arcade",
+        "shooter",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Sky Squadron",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/",
+          "summary": "Vertical scrolling shooter: waves, power-ups and a boss every fifth wave.",
+          "keywords": [
+            "plane shooter game",
+            "arcade shmup online",
+            "1942 game",
+            "airplane game free",
+            "vertical shooter browser"
+          ]
+        },
+        "ru": {
+          "title": "Самолётики",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/",
+          "summary": "Вертикальный скролл-шутер: волны, бонусы и босс каждую пятую волну.",
+          "keywords": [
+            "самолётики",
+            "игра самолётики",
+            "аркадный шутер онлайн",
+            "1942 игра",
+            "самолеты стрелялка браузер"
+          ]
+        }
+      }
+    },
+    {
       "id": "moto3d",
       "emoji": "🏁",
       "categories": [

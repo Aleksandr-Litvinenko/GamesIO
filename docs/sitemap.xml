@@ -34,6 +34,14 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
   </url>
   <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/"/>
+  </url>
+  <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>monthly</changefreq>
@@ -88,6 +96,14 @@
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/"/>
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/</loc>

@@ -437,6 +437,9 @@
       this.state = 'over';
       this.result = payload || {};
       this.result.isRecord = Arcade.submitScore(this.def.id, this.score);
+      // таблица лидеров обновляется до отрисовки итогового экрана,
+      // чтобы на нём сразу показать занятое место
+      if (Arcade.onGameFinished) Arcade.onGameFinished(this);
       Arcade.sfx(this.result.won ? 'fanfare' : 'die');
       this.renderOverlay();
       if (this.onGameOver) this.onGameOver(this.result);
@@ -516,6 +519,7 @@
               <div><span>${Arcade.t('best')}</span><strong>${Arcade.highScore(id)}</strong></div>
             </div>
             ${r.isRecord ? `<p class="record">${Arcade.t('newRecord')}</p>` : ''}
+            ${Arcade.overlayExtra ? Arcade.overlayExtra(this) : ''}
             <button class="btn primary" data-act="restart">${Arcade.t('again')}</button>
             <a class="btn ghost" href="${Arcade.hubUrl()}">${Arcade.t('menu')}</a>
           </div>`;

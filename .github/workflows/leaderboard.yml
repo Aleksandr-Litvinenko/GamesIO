@@ -1,0 +1,44 @@
+# Пересобирает общую таблицу лидеров из issue с меткой «score».
+name: leaderboard
+
+on:
+  issues:
+    types: [opened, edited, labeled, reopened, closed, deleted]
+  workflow_dispatch:
+  schedule:
+    # подстраховка на случай пропущенного события
+    - cron: '17 4 * * *'
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: leaderboard
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Собрать leaderboard.json
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const script = require('./.github/scripts/leaderboard.js');
+            await script({ github, context, core, fs });
+
+      - name: Закоммитить, если что-то изменилось
+        run: |
+          if git diff --quiet -- docs/data/leaderboard.json; then
+            echo "таблица не изменилась"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data/leaderboard.json
+          git commit -m "Обновлена таблица лидеров"
+          git push
