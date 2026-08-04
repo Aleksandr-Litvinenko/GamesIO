@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GamesIO — мини-игры в браузере</title>
+<meta name="description" content="Сервис мини-игр: Арканоид, Змейка и Мотоциклы. Без установки, прямо в браузере.">
+<meta name="theme-color" content="#05060d">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="brand" href="#/">Games<span class="dot">IO</span> <small>мини-игры в браузере</small></a>
+    <div class="top-actions">
+      <button class="icon-btn" id="mute" aria-label="Выключить звук">🔊</button>
+    </div>
+  </header>
+
+  <!-- витрина -->
+  <main id="hub">
+    <section class="hero">
+      <span class="eyebrow">Вставьте монету</span>
+      <h1>Три автомата <em>в одной вкладке</em></h1>
+      <p>Каждый экран внизу — живая игра на автопилоте. Нажми на любой, чтобы сесть за руль. Рекорды сохраняются в браузере.</p>
+    </section>
+    <div class="grid" id="grid"></div>
+    <footer class="foot">
+      Работает офлайн после первой загрузки. Управление с клавиатуры, мыши и тачскрина.
+      Пауза — <code>P</code> или <code>Esc</code>.
+    </footer>
+  </main>
+
+  <!-- игра -->
+  <main id="play" hidden>
+    <div class="playbar">
+      <button class="icon-btn" id="back">← В меню</button>
+      <h2 id="game-title">Игра</h2>
+      <div class="spacer"></div>
+      <button class="icon-btn" id="restart">Заново</button>
+      <button class="icon-btn" id="pause">Пауза</button>
+    </div>
+    <div class="hud" id="hud"></div>
+    <div class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div class="overlay" id="overlay"></div>
+    </div>
+  </main>
+
+</div>
+
+<script src="js/engine.js"></script>
+<script src="js/games/arkanoid.js"></script>
+<script src="js/games/snake.js"></script>
+<script src="js/games/moto.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
