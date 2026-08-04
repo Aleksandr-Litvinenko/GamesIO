@@ -1,0 +1,24 @@
+# GamesIO
+
+> Three classic mini-games right in your browser: breakout, snake and light cycles. No sign-up, no install, completely free. Works on phone and desktop.
+
+GamesIO is a free, open-source collection of browser mini-games written in
+plain JavaScript. No sign-up, no install, no tracking. Every game runs entirely
+client side and stores high scores in localStorage. The site is available in
+English (default) and Russian.
+
+## Games
+
+- [Breakout](https://aleksandr-litvinenko.github.io/GamesIO/breakout/): Clear every brick, catch power-ups and never drop the ball. Russian version: [Арканоид](https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/).
+- [Snake](https://aleksandr-litvinenko.github.io/GamesIO/snake/): Eat apples, grow longer and never bite yourself. Golden apples pay +50. Russian version: [Змейка](https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/).
+- [Light Cycles](https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/): Tron-style light cycles: leave a wall behind you and outlast three bots. Russian version: [Мотоциклы](https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/).
+
+## Catalogue
+
+- [Machine-readable catalogue](https://aleksandr-litvinenko.github.io/GamesIO/games.json): every game with titles, URLs and keywords per locale.
+- [English home](https://aleksandr-litvinenko.github.io/GamesIO/)
+- [Russian home](https://aleksandr-litvinenko.github.io/GamesIO/ru/)
+
+## Source
+
+- [GitHub repository](https://github.com/Aleksandr-Litvinenko/GamesIO): MIT licence, no build step, no dependencies.

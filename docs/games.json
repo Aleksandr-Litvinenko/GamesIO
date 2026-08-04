@@ -1,0 +1,115 @@
+{
+  "site": "GamesIO",
+  "url": "https://aleksandr-litvinenko.github.io/GamesIO",
+  "updated": "2026-08-04",
+  "games": [
+    {
+      "id": "arkanoid",
+      "emoji": "🧱",
+      "categories": [
+        "arcade",
+        "classic",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Breakout",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/breakout/",
+          "summary": "Clear every brick, catch power-ups and never drop the ball.",
+          "keywords": [
+            "breakout game",
+            "play breakout online",
+            "arkanoid online",
+            "brick breaker",
+            "free breakout"
+          ]
+        },
+        "ru": {
+          "title": "Арканоид",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/",
+          "summary": "Разбей все кирпичи, лови бонусы и не теряй мяч.",
+          "keywords": [
+            "арканоид",
+            "арканоид играть",
+            "breakout онлайн",
+            "игра в кирпичики",
+            "арканоид бесплатно"
+          ]
+        }
+      }
+    },
+    {
+      "id": "snake",
+      "emoji": "🐍",
+      "categories": [
+        "arcade",
+        "classic",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Snake",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/snake/",
+          "summary": "Eat apples, grow longer and never bite yourself. Golden apples pay +50.",
+          "keywords": [
+            "snake game",
+            "play snake online",
+            "classic snake",
+            "snake game free",
+            "nokia snake"
+          ]
+        },
+        "ru": {
+          "title": "Змейка",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/",
+          "summary": "Ешь яблоки, расти и не врезайся в себя. Золотое яблоко даёт +50.",
+          "keywords": [
+            "змейка",
+            "змейка играть",
+            "игра змейка онлайн",
+            "snake игра",
+            "змейка бесплатно"
+          ]
+        }
+      }
+    },
+    {
+      "id": "moto",
+      "emoji": "🏍️",
+      "categories": [
+        "arcade",
+        "versus",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Light Cycles",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/",
+          "summary": "Tron-style light cycles: leave a wall behind you and outlast three bots.",
+          "keywords": [
+            "light cycles game",
+            "tron game online",
+            "light bike game",
+            "tron light cycle",
+            "snake vs bots"
+          ]
+        },
+        "ru": {
+          "title": "Мотоциклы",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/",
+          "summary": "Световые мотоциклы: оставляй стену за собой и переживи трёх ботов.",
+          "keywords": [
+            "световые мотоциклы",
+            "трон игра",
+            "tron мотоциклы",
+            "игра мотоциклы онлайн",
+            "змейка против ботов"
+          ]
+        }
+      }
+    }
+  ]
+}

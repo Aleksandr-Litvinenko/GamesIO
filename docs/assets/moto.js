@@ -49,8 +49,8 @@
 
     syncInfo() {
       this.g.setInfo({
-        Раунд: this.round,
-        Жизни: '❤'.repeat(Math.max(0, this.lives)) || '—',
+        round: this.round,
+        lives: '❤'.repeat(Math.max(0, this.lives)) || '—',
       });
     }
 
@@ -168,7 +168,7 @@
         this.lives -= 1;
         this.syncInfo();
         if (this.lives <= 0) {
-          this.g.gameOver({ message: `Пройдено раундов: ${this.round - 1}` });
+          this.g.gameOver({ message: Arcade.t('roundsCleared', { n: this.round - 1 }) });
         } else {
           this.roundOver = 1.4;
           this.retry = true;
@@ -360,7 +360,7 @@
       ctx.font = '10px ui-monospace, Menlo, monospace';
       ctx.textAlign = 'left';
       ctx.textBaseline = 'alphabetic';
-      ctx.fillText('БУСТ · SHIFT', px + 12, py + 13);
+      ctx.fillText(Arcade.t('boost'), px + 12, py + 13);
 
       const bw = pw - 24;
       const bh = 7;
@@ -400,11 +400,13 @@
       ctx.textAlign = 'center';
       ctx.fillStyle = me.alive ? '#4ade80' : '#f87171';
       ctx.font = 'bold 30px ui-monospace, Menlo, monospace';
-      ctx.fillText(me.alive ? 'РАУНД ПРОЙДЕН' : 'ТЫ РАЗБИЛСЯ', W / 2, H / 2);
+      ctx.fillText(me.alive ? Arcade.t('roundClear') : Arcade.t('crashed'), W / 2, H / 2);
       ctx.fillStyle = 'rgba(226,232,240,0.8)';
       ctx.font = '14px ui-monospace, Menlo, monospace';
       ctx.fillText(
-        me.alive ? `Раунд ${this.round + 1} — быстрее` : `Осталось жизней: ${this.lives}`,
+        me.alive
+          ? Arcade.t('nextRoundFaster', { n: this.round + 1 })
+          : Arcade.t('livesLeft', { n: this.lives }),
         W / 2,
         H / 2 + 26
       );
@@ -413,16 +415,6 @@
 
   Arcade.register({
     id: 'moto',
-    title: 'Мотоциклы',
-    emoji: '🏍️',
-    accent: '#a78bfa',
-    tagline: 'Световые мотоциклы: оставляй стену за собой и переживи трёх ботов.',
-    controls: [
-      '← ↑ → ↓ или WASD — поворот',
-      'Shift — буст (тратит энергию)',
-      'Тап слева/справа — поворот на телефоне',
-      'P или Esc — пауза',
-    ],
     width: W,
     height: H,
     create: (g) => new Moto(g),

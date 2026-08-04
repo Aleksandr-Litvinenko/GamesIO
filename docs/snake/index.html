@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Snake — play the classic game online free | GamesIO</title>
+  <meta name="description" content="Classic snake in your browser on a 20×20 grid: smooth movement, speed that ramps as you grow, and a timed golden apple. Arrows, WASD or swipes. Play free.">
+  <meta name="keywords" content="snake game, play snake online, classic snake, snake game free, nokia snake">
+  <link rel="canonical" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/">
+  <link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/">
+  <link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/">
+  <link rel="alternate" hreflang="x-default" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="Aleksandr Litvinenko">
+  <meta name="theme-color" content="#05060d">
+  <meta name="color-scheme" content="dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GamesIO">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Snake — play the classic game online free | GamesIO">
+  <meta property="og:description" content="Classic snake in your browser on a 20×20 grid: smooth movement, speed that ramps as you grow, and a timed golden apple. Arrows, WASD or swipes. Play free.">
+  <meta property="og:url" content="https://aleksandr-litvinenko.github.io/GamesIO/snake/">
+  <meta property="og:image" content="https://aleksandr-litvinenko.github.io/GamesIO/og/snake.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Snake — play the classic game online free | GamesIO">
+  <meta name="twitter:description" content="Classic snake in your browser on a 20×20 grid: smooth movement, speed that ramps as you grow, and a timed golden apple. Arrows, WASD or swipes. Play free.">
+  <meta name="twitter:image" content="https://aleksandr-litvinenko.github.io/GamesIO/og/snake.png">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","@id":"https://aleksandr-litvinenko.github.io/GamesIO/snake/#game","name":"Snake","url":"https://aleksandr-litvinenko.github.io/GamesIO/snake/","description":"Classic snake in your browser on a 20×20 grid: smooth movement, speed that ramps as you grow, and a timed golden apple. Arrows, WASD or swipes. Play free.","inLanguage":"en","genre":["Arcade","Classic","Retro"],"gamePlatform":"Web browser","applicationCategory":"GameApplication","operatingSystem":"Any (web browser)","playMode":"SinglePlayer","datePublished":"2026-08-04","author":{"@id":"https://aleksandr-litvinenko.github.io/GamesIO/#person"},"offers":{"@type":"Offer","price":"0","priceCurrency":"USD","availability":"https://schema.org/InStock"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://aleksandr-litvinenko.github.io/GamesIO/"},{"@type":"ListItem","position":2,"name":"Snake","item":"https://aleksandr-litvinenko.github.io/GamesIO/snake/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the snake wrap around the walls?","acceptedAnswer":{"@type":"Answer","text":"No — this is the classic ruleset. Hitting a wall or your own tail ends the run."}},{"@type":"Question","name":"What is the golden apple for?","acceptedAnswer":{"@type":"Answer","text":"It pays 50 points instead of the usual 10 and appears after every fifth apple eaten. It only lasts 6.5 seconds before disappearing."}},{"@type":"Question","name":"Does the game get faster?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each apple shortens the step time from 0.145 down to 0.058 seconds per cell, so by the fiftieth apple the pace is genuinely demanding."}},{"@type":"Question","name":"What is the maximum score?","acceptedAnswer":{"@type":"Answer","text":"The grid is 20×20, so 400 cells. Filling it completely counts as a win, though in practice that is nearly unreachable."}}]},{"@type":"HowTo","name":"How to play: Snake","step":[{"@type":"HowToStep","position":1,"text":"← ↑ → ↓ or WASD — turn"},{"@type":"HowToStep","position":2,"text":"Swipe in any direction — turn on mobile"},{"@type":"HowToStep","position":3,"text":"P or Esc — pause"}]}]}</script>
+  <script>window.GAMESIO={"locale":"en","hub":"../","t":{"score":"Score","best":"Best","lives":"Lives","level":"Level","length":"Length","apples":"Apples","round":"Round","play":"Play","resume":"Resume","restart":"Restart","again":"Play again","menu":"Back to games","paused":"Paused","gameOver":"Game over","victory":"You win!","newRecord":"🎉 New best score!","recordIs":"Best: {n}","launch":"Space or tap to launch","boost":"BOOST · SHIFT","roundClear":"ROUND CLEARED","crashed":"YOU CRASHED","nextRoundFaster":"Round {n} — faster","livesLeft":"Lives left: {n}","levelsCleared":"Levels cleared: {n}","snakeLength":"Snake length: {n}","roundsCleared":"Rounds cleared: {n}","perfectSnake":"Grid filled — a perfect snake!"},"games":{"arkanoid":{"title":"Breakout","emoji":"🧱","accent":"#22d3ee","tagline":"Clear every brick, catch power-ups and never drop the ball.","controls":["<kbd>←</kbd> <kbd>→</kbd> or mouse — move the paddle","<kbd>Space</kbd> or tap the screen — launch the ball","<kbd>P</kbd> or <kbd>Esc</kbd> — pause"],"url":"../breakout/"},"snake":{"title":"Snake","emoji":"🐍","accent":"#4ade80","tagline":"Eat apples, grow longer and never bite yourself. Golden apples pay +50.","controls":["<kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> or <kbd>WASD</kbd> — turn","Swipe in any direction — turn on mobile","<kbd>P</kbd> or <kbd>Esc</kbd> — pause"],"url":"../snake/"},"moto":{"title":"Light Cycles","emoji":"🏍️","accent":"#a78bfa","tagline":"Tron-style light cycles: leave a wall behind you and outlast three bots.","controls":["<kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> or <kbd>WASD</kbd> — turn","<kbd>Shift</kbd> — boost, drains the energy bar at the bottom","Tap the left or right half of the screen — turn on mobile","<kbd>P</kbd> or <kbd>Esc</kbd> — pause"],"url":"../light-cycles/"}}}</script>
+</head>
+<body data-game="snake">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="shell head-inner">
+    <a class="brand" href="../">
+      <span class="brand-mark">Games<span>IO</span></span>
+      <span class="brand-sub">mini-games in your browser</span>
+    </a>
+    <nav class="head-nav" aria-label="Main navigation">
+      <a href="../#catalog">Games</a>
+      <a href="https://github.com/Aleksandr-Litvinenko/GamesIO" rel="noopener">GitHub</a>
+    </nav>
+    <div class="head-actions">
+      <a class="lang-switch" href="../ru/zmeyka/" hreflang="ru" rel="alternate">По-русски</a>
+      <button class="icon-btn" id="mute" type="button" aria-label="Sound">🔊</button>
+    </div>
+  </div>
+</header>
+
+<aside class="ad ad--top" data-ad="top" aria-label="Advertisement" hidden>
+  <div class="shell"><span class="ad-label">Advertisement</span><div class="ad-box"></div></div>
+</aside>
+
+<main id="main">
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  <div class="shell">
+    <a href="../">Home</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Snake</span>
+  </div>
+</nav>
+
+<div class="shell game-wrap" style="--accent:#4ade80">
+  <div class="game-col">
+    <header class="game-head">
+      <h1>🐍 Snake</h1>
+      <p class="game-short">Eat apples, grow longer and never bite yourself. Golden apples pay +50. <span class="pill">Free, no sign-up</span></p>
+    </header>
+
+    <div class="playbar">
+      <a class="icon-btn" href="../">← All games</a>
+      <span class="spacer"></span>
+      <button class="icon-btn" id="restart" type="button">Restart</button>
+      <button class="icon-btn" id="pause" type="button">Pause</button>
+    </div>
+    <div class="hud" id="hud"></div>
+    <div class="stage" id="stage">
+      <canvas id="canvas"></canvas>
+      <div class="overlay" id="overlay"></div>
+    </div>
+  </div>
+
+  <aside class="game-side">
+    <aside class="ad ad--side" data-ad="side" aria-label="Advertisement" hidden>
+  <div><span class="ad-label">Advertisement</span><div class="ad-box"></div></div>
+</aside>
+    <section class="side-card">
+      <h2>Tips</h2>
+      <ul class="tips"><li>Hug the walls and stack your body in tight rows so the centre stays open for manoeuvring.</li>
+        <li>Turns are queued: two quick presses in a row are both remembered, so fast double turns work.</li>
+        <li>The golden apple blinks two seconds before it vanishes. If you are not close by then, let it go.</li>
+        <li>Never enter a dead end shorter than your own body — you cannot turn 180 degrees to escape.</li>
+        <li>The longer the snake, the faster it moves. Plan two moves ahead rather than one.</li></ul>
+    </section>
+  </aside>
+</div>
+
+<div class="shell prose">
+  <section>
+    <h2>Controls</h2>
+    <ul class="controls-list"><li><kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> or <kbd>WASD</kbd> — turn</li>
+      <li>Swipe in any direction — turn on mobile</li>
+      <li><kbd>P</kbd> or <kbd>Esc</kbd> — pause</li></ul>
+  </section>
+
+  <section>
+    <h2>About the game</h2>
+    <p>Snake went mainstream in 1997 on the Nokia 6110, though the idea is two decades older. The rules never changed: the snake moves forward without stopping, every apple makes it longer, and your own tail eventually becomes the real hazard.</p>
+    <p>This version runs on a 20×20 grid at a pace that tightens with every apple — from 0.145 seconds per cell down to 0.058. Every fifth apple spawns a golden one worth 50 points instead of 10, but it only lives six and a half seconds, so collecting it always costs you some risk.</p>
+  </section>
+
+  <section>
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>Does the snake wrap around the walls?</summary>
+        <p>No — this is the classic ruleset. Hitting a wall or your own tail ends the run.</p>
+      </details>
+      <details>
+        <summary>What is the golden apple for?</summary>
+        <p>It pays 50 points instead of the usual 10 and appears after every fifth apple eaten. It only lasts 6.5 seconds before disappearing.</p>
+      </details>
+      <details>
+        <summary>Does the game get faster?</summary>
+        <p>Yes. Each apple shortens the step time from 0.145 down to 0.058 seconds per cell, so by the fiftieth apple the pace is genuinely demanding.</p>
+      </details>
+      <details>
+        <summary>What is the maximum score?</summary>
+        <p>The grid is 20×20, so 400 cells. Filling it completely counts as a win, though in practice that is nearly unreachable.</p>
+      </details>
+    </div>
+  </section>
+
+  <section class="wide">
+    <h2>More games</h2>
+    <div class="mini-grid">
+      <a class="mini-card" style="--accent:#22d3ee" href="../breakout/">
+        <span class="mini-emoji">🧱</span>
+        <span><strong>Breakout</strong><span>Clear every brick, catch power-ups and never drop the ball.</span></span>
+      </a>
+      <a class="mini-card" style="--accent:#a78bfa" href="../light-cycles/">
+        <span class="mini-emoji">🏍️</span>
+        <span><strong>Light Cycles</strong><span>Tron-style light cycles: leave a wall behind you and outlast three bots.</span></span>
+      </a>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="site-foot">
+  <div class="shell foot-inner">
+    <div class="foot-col">
+      <span class="brand-mark">Games<span>IO</span></span>
+      <p>GamesIO is a small set of classic arcade games rewritten in plain JavaScript. Open source, no trackers, and everything runs offline after the first load.</p>
+    </div>
+    <div class="foot-col">
+      <h2>Sections</h2>
+      <ul>
+        <li><a href="../">Home</a></li>
+        <li><a href="../breakout/">Breakout</a></li>
+        <li><a href="../snake/">Snake</a></li>
+        <li><a href="../light-cycles/">Light Cycles</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h2>Project</h2>
+      <ul>
+        <li><a href="https://github.com/Aleksandr-Litvinenko/GamesIO" rel="noopener">Source code on GitHub</a></li>
+        <li><a href="../ru/zmeyka/" hreflang="ru">По-русски</a></li>
+      </ul>
+      <p class="foot-fine">© 2026 Aleksandr Litvinenko. Code released under the MIT licence.</p>
+    </div>
+  </div>
+</footer>
+
+<aside class="ad ad--bottom" data-ad="bottom" aria-label="Advertisement" hidden>
+  <div class="shell"><span class="ad-label">Advertisement</span><div class="ad-box"></div></div>
+</aside>
+
+<script src="../assets/engine.js"></script>
+<script src="../assets/arkanoid.js"></script>
+<script src="../assets/snake.js"></script>
+<script src="../assets/moto.js"></script>
+<script src="../assets/ads.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>

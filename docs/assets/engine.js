@@ -7,6 +7,53 @@
   const Arcade = (window.Arcade = {});
 
   /* ------------------------------------------------------------------ *
+   * Локализация и отображаемые данные.
+   * Механика игр живёт в JS, а названия, описания и подписи приходят
+   * со страницы (window.GAMESIO) — чтобы одна сборка работала на любом языке.
+   * ------------------------------------------------------------------ */
+  const CFG = window.GAMESIO || {};
+  const FALLBACK = {
+    score: 'Score',
+    best: 'Best',
+    lives: 'Lives',
+    level: 'Level',
+    length: 'Length',
+    apples: 'Apples',
+    round: 'Round',
+    play: 'Play',
+    resume: 'Resume',
+    restart: 'Restart',
+    again: 'Play again',
+    menu: 'Back to games',
+    paused: 'Paused',
+    gameOver: 'Game over',
+    victory: 'You win!',
+    newRecord: 'New best score!',
+    recordIs: 'Best: {n}',
+    launch: 'Space or tap to launch',
+    boost: 'BOOST · SHIFT',
+    roundClear: 'ROUND CLEARED',
+    crashed: 'YOU CRASHED',
+    nextRoundFaster: 'Round {n} — faster',
+    livesLeft: 'Lives left: {n}',
+    levelsCleared: 'Levels cleared: {n}',
+    snakeLength: 'Snake length: {n}',
+    roundsCleared: 'Rounds cleared: {n}',
+    perfectSnake: 'Grid filled — a perfect snake!',
+  };
+
+  Arcade.t = function (key, params) {
+    let s = (CFG.t && CFG.t[key]) || FALLBACK[key] || key;
+    if (params) {
+      for (const k in params) s = s.split('{' + k + '}').join(params[k]);
+    }
+    return s;
+  };
+
+  Arcade.meta = (id) => (CFG.games && CFG.games[id]) || {};
+  Arcade.hubUrl = () => CFG.hub || './';
+
+  /* ------------------------------------------------------------------ *
    * Registry
    * ------------------------------------------------------------------ */
   const games = [];
@@ -395,14 +442,14 @@
     renderHUD() {
       if (!this.hudEl) return;
       const parts = [
-        `<span class="hud-item"><b>Очки</b>${this.score}</span>`,
-        `<span class="hud-item"><b>Рекорд</b>${Math.max(
+        `<span class="hud-item"><b>${Arcade.t('score')}</b>${this.score}</span>`,
+        `<span class="hud-item"><b>${Arcade.t('best')}</b>${Math.max(
           this.score,
           Arcade.highScore(this.def.id)
         )}</span>`,
       ];
       for (const k in this.info) {
-        parts.push(`<span class="hud-item"><b>${k}</b>${this.info[k]}</span>`);
+        parts.push(`<span class="hud-item"><b>${Arcade.t(k)}</b>${this.info[k]}</span>`);
       }
       this.hudEl.innerHTML = parts.join('');
     }
@@ -416,42 +463,43 @@
         return;
       }
       o.hidden = false;
-      const d = this.def;
+      const id = this.def.id;
+      const m = Arcade.meta(id);
       let html = '';
       if (this.state === 'ready') {
         html = `
           <div class="panel">
-            <div class="panel-emoji">${d.emoji}</div>
-            <h2>${d.title}</h2>
-            <p class="panel-sub">${d.tagline}</p>
-            <ul class="controls">${d.controls
+            <div class="panel-emoji">${m.emoji || '🕹️'}</div>
+            <h2>${m.title || id}</h2>
+            <p class="panel-sub">${m.tagline || ''}</p>
+            <ul class="controls">${(m.controls || [])
               .map((c) => `<li>${c}</li>`)
               .join('')}</ul>
-            <button class="btn primary" data-act="play">Играть</button>
-            <p class="hint">Рекорд: ${Arcade.highScore(d.id)}</p>
+            <button class="btn primary" data-act="play">${Arcade.t('play')}</button>
+            <p class="hint">${Arcade.t('recordIs', { n: Arcade.highScore(id) })}</p>
           </div>`;
       } else if (this.state === 'paused') {
         html = `
           <div class="panel">
-            <h2>Пауза</h2>
-            <button class="btn primary" data-act="resume">Продолжить</button>
-            <button class="btn" data-act="restart">Заново</button>
-            <button class="btn ghost" data-act="menu">В меню</button>
+            <h2>${Arcade.t('paused')}</h2>
+            <button class="btn primary" data-act="resume">${Arcade.t('resume')}</button>
+            <button class="btn" data-act="restart">${Arcade.t('restart')}</button>
+            <a class="btn ghost" href="${Arcade.hubUrl()}">${Arcade.t('menu')}</a>
           </div>`;
       } else {
         const r = this.result || {};
         html = `
           <div class="panel">
             <div class="panel-emoji">${r.won ? '🏆' : '💥'}</div>
-            <h2>${r.won ? 'Победа!' : 'Игра окончена'}</h2>
+            <h2>${r.won ? Arcade.t('victory') : Arcade.t('gameOver')}</h2>
             ${r.message ? `<p class="panel-sub">${r.message}</p>` : ''}
             <div class="final">
-              <div><span>Очки</span><strong>${this.score}</strong></div>
-              <div><span>Рекорд</span><strong>${Arcade.highScore(d.id)}</strong></div>
+              <div><span>${Arcade.t('score')}</span><strong>${this.score}</strong></div>
+              <div><span>${Arcade.t('best')}</span><strong>${Arcade.highScore(id)}</strong></div>
             </div>
-            ${r.isRecord ? '<p class="record">🎉 Новый рекорд!</p>' : ''}
-            <button class="btn primary" data-act="restart">Ещё раз</button>
-            <button class="btn ghost" data-act="menu">В меню</button>
+            ${r.isRecord ? `<p class="record">${Arcade.t('newRecord')}</p>` : ''}
+            <button class="btn primary" data-act="restart">${Arcade.t('again')}</button>
+            <a class="btn ghost" href="${Arcade.hubUrl()}">${Arcade.t('menu')}</a>
           </div>`;
       }
       o.innerHTML = html;

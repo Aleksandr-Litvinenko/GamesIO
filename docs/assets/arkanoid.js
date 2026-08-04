@@ -117,8 +117,8 @@
 
     syncInfo() {
       this.g.setInfo({
-        Жизни: '❤'.repeat(Math.max(0, this.lives)) || '—',
-        Уровень: this.levelIndex + 1 + (this.loop ? `·${this.loop + 1}` : ''),
+        lives: '❤'.repeat(Math.max(0, this.lives)) || '—',
+        level: this.levelIndex + 1 + (this.loop ? `·${this.loop + 1}` : ''),
       });
     }
 
@@ -408,7 +408,9 @@
           gravity: 260,
         });
         this.g.gameOver({
-          message: `Пройдено уровней: ${this.levelIndex + this.loop * LEVELS.length}`,
+          message: Arcade.t('levelsCleared', {
+            n: this.levelIndex + this.loop * LEVELS.length,
+          }),
         });
       } else {
         this.g.sfx('die');
@@ -507,22 +509,13 @@
         ctx.fillStyle = 'rgba(226,232,240,0.75)';
         ctx.font = '13px ui-monospace, Menlo, monospace';
         ctx.textAlign = 'center';
-        ctx.fillText('Пробел или тап — запуск', W / 2, PADDLE_Y - 34);
+        ctx.fillText(Arcade.t('launch'), W / 2, PADDLE_Y - 34);
       }
     }
   }
 
   Arcade.register({
     id: 'arkanoid',
-    title: 'Арканоид',
-    emoji: '🧱',
-    accent: '#22d3ee',
-    tagline: 'Разбей все кирпичи, лови бонусы и не теряй мяч.',
-    controls: [
-      '← → или мышь — двигать платформу',
-      'Пробел / тап — запустить мяч',
-      'P или Esc — пауза',
-    ],
     width: W,
     height: H,
     create: (g) => new Arkanoid(g),

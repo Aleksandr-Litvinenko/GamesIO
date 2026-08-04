@@ -48,7 +48,7 @@
     }
 
     syncInfo() {
-      this.g.setInfo({ Длина: this.cells.length, Яблок: this.eaten });
+      this.g.setInfo({ length: this.cells.length, apples: this.eaten });
     }
 
     occupied(x, y) {
@@ -69,7 +69,7 @@
     spawnFood() {
       const c = this.freeCell();
       if (!c) {
-        this.g.gameOver({ won: true, message: 'Поле заполнено — идеальная змейка!' });
+        this.g.gameOver({ won: true, message: Arcade.t('perfectSnake') });
         return;
       }
       this.food = { x: c.x, y: c.y, born: 0 };
@@ -188,7 +188,7 @@
         life: 0.7,
         size: 4,
       });
-      this.g.gameOver({ message: `Длина змейки: ${this.cells.length}` });
+      this.g.gameOver({ message: Arcade.t('snakeLength', { n: this.cells.length }) });
     }
 
     /* ---------------- отрисовка ---------------- */
@@ -305,15 +305,6 @@
 
   Arcade.register({
     id: 'snake',
-    title: 'Змейка',
-    emoji: '🐍',
-    accent: '#4ade80',
-    tagline: 'Ешь яблоки, расти и не врезайся в себя. Золотое яблоко даёт +50.',
-    controls: [
-      '← ↑ → ↓ или WASD — поворот',
-      'Свайп — поворот на телефоне',
-      'P или Esc — пауза',
-    ],
     width: W,
     height: H,
     create: (g) => new Snake(g),

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/breakout/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/breakout/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/snake/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/breakout/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/"/>
+  </url>
+</urlset>
