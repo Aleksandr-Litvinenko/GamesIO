@@ -121,6 +121,14 @@ const UI = {
       waveN: 'ВОЛНА {n}',
       bossIncoming: 'ВНИМАНИЕ: БОСС',
       wavesCleared: 'Пройдено волн: {n}',
+      base: 'База',
+      baseLost: 'База уничтожена',
+      weapon: 'Оружие',
+      bossDown: 'Босс повержен!',
+      levelProgress: 'Пройдено {n}% уровня',
+      rings: 'Кольца',
+      rolling: 'В КЛУБКЕ',
+      finishedIn: 'Финиш за {n} с',
     },
   },
   en: {
@@ -230,6 +238,14 @@ const UI = {
       waveN: 'WAVE {n}',
       bossIncoming: 'WARNING: BOSS',
       wavesCleared: 'Waves cleared: {n}',
+      base: 'Base',
+      baseLost: 'Base destroyed',
+      weapon: 'Weapon',
+      bossDown: 'Boss down!',
+      levelProgress: '{n}% of the level cleared',
+      rings: 'Rings',
+      rolling: 'ROLLING',
+      finishedIn: 'Finished in {n}s',
     },
   },
 };
@@ -242,6 +258,8 @@ const CATEGORIES = {
     retro: 'Ретро',
     racing: 'Гонки',
     shooter: 'Шутер',
+    platformer: 'Платформер',
+    strategy: 'Тактика',
     pseudo3d: '3D',
     twoPlayer: 'На двоих',
   },
@@ -252,6 +270,8 @@ const CATEGORIES = {
     retro: 'Retro',
     racing: 'Racing',
     shooter: 'Shooter',
+    platformer: 'Platformer',
+    strategy: 'Tactics',
     pseudo3d: '3D',
     twoPlayer: 'Two players',
   },
@@ -635,6 +655,291 @@ const GAMES = [
     },
   },
   {
+    id: 'tanks',
+    emoji: '🚜',
+    accent: '#fbbf24',
+    categories: ['arcade', 'strategy', 'retro', 'classic'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Танчики',
+      slug: 'tanchiki',
+      short: 'Держи базу, круши кирпич и не пропусти танки с верхнего края.',
+      metaTitle: 'Танчики — играть онлайн бесплатно, как на Денди | GamesIO',
+      metaDescription:
+        'Классические танчики с Денди в браузере: поле из кирпича и брони, база под защитой, волны вражеских танков. Стрелки и пробел или палец. Играть бесплатно.',
+      keywords: ['танчики', 'танчики играть', 'battle city онлайн', 'танки денди', 'танчики бесплатно'],
+      about: [
+        'Battle City вышла в 1985 году и в России стала просто «танчиками» — игрой, в которую играли вдвоём на одном картридже. Правила держатся на одной идее: у вас есть база, и потерять её обиднее, чем потерять жизнь. Кирпичные стены вокруг неё разрушаются с обеих сторон, поэтому оборона всё время осыпается.',
+        'Поле собрано из четвертинок кирпича, как в оригинале: одна пуля выбивает не всю стену, а только кусок, и через пару выстрелов появляется проход. Броня не пробивается вообще, вода не пропускает танк, но пропускает пулю, а в кустах танк не видно. Танки идут сверху и целятся в базу, но иногда сворачивают за вами.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> или <kbd>WASD</kbd> — движение',
+        '<kbd>Пробел</kbd> — выстрел',
+        'Касание экрана — танк едет к пальцу',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+      ],
+      tips: [
+        'Не разрушайте кирпич вокруг базы сами: каждая выбитая четвертинка — это дыра, через которую пройдёт чужая пуля.',
+        'Броня не пробивается ничем, поэтому за ней можно пересидеть, пока перезаряжаетесь.',
+        'Вода останавливает танк, но не пулю. Через неё удобно расстреливать тех, кто не может подойти.',
+        'В кустах вас не видно, но и вы стреляете вслепую — засада работает только если помнить, где противник.',
+        'Розовые танки держат два попадания. Первым выстрелом они сбрасываются в обычные, добивать нужно сразу.',
+      ],
+      faq: [
+        {
+          q: 'Что происходит, если базу уничтожат?',
+          a: 'Партия заканчивается сразу, сколько бы жизней ни оставалось. Это главное отличие жанра от обычной стрелялки.',
+        },
+        {
+          q: 'Почему стена разрушается не целиком?',
+          a: 'Каждый кирпичный блок состоит из четырёх четвертинок, и пуля выбивает только ту, в которую попала. Так было в оригинале — это позволяет прострелить узкую щель.',
+        },
+        {
+          q: 'Сколько танков в волне?',
+          a: 'Шесть плюс по одному за каждые две волны. Одновременно на поле не больше четырёх, остальные ждут очереди на респавн.',
+        },
+        {
+          q: 'Можно играть вдвоём?',
+          a: 'Пока нет, здесь один игрок против волн. Игра на двоих за одной клавиатурой есть в «Дуэли на двоих».',
+        },
+      ],
+    },
+    en: {
+      title: 'Battle Tanks',
+      slug: 'battle-tanks',
+      short: 'Defend the base, blast through brick and stop the tanks rolling in from the top.',
+      metaTitle: 'Battle Tanks — play the NES classic online free | GamesIO',
+      metaDescription:
+        'Classic NES tank battle in your browser: brick and steel maze, a base to defend, waves of enemy tanks. Arrow keys and space, or touch. Play free.',
+      keywords: ['battle city game', 'tank game online', 'nes tanks', 'battle tanks free', 'retro tank game'],
+      about: [
+        'Battle City arrived in 1985 and became the game a generation played two-up on a single cartridge. It rests on one idea: you have a base, and losing it hurts more than losing a life. The brick around it can be shot from either side, so your defences crumble all game long.',
+        'The field is made of brick quarters, exactly as in the original: one bullet knocks out a piece rather than a whole wall, and a couple of shots opens a gap. Steel cannot be destroyed at all, water stops tanks but not bullets, and bushes hide whoever is inside them. Enemy tanks head for your base but will sometimes turn to chase you.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>↑</kbd> <kbd>→</kbd> <kbd>↓</kbd> or <kbd>WASD</kbd> — move',
+        '<kbd>Space</kbd> — fire',
+        'Touch the screen — the tank drives toward your finger',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+      ],
+      tips: [
+        'Do not shoot the brick around your own base: every quarter you remove is a hole an enemy bullet will use.',
+        'Steel is indestructible, so you can sit behind it while your gun reloads.',
+        'Water blocks tanks but not bullets, which makes it a safe firing line against anything that cannot reach you.',
+        'Bushes hide you, but you shoot blind from inside them — an ambush only works if you remember where the enemy was.',
+        'Pink tanks take two hits. The first shot downgrades them, so finish the job immediately.',
+      ],
+      faq: [
+        {
+          q: 'What happens if the base is destroyed?',
+          a: 'The run ends immediately, no matter how many lives you have left. That is what separates this genre from a plain shooter.',
+        },
+        {
+          q: 'Why does a wall not break all at once?',
+          a: 'Each brick block is four quarters and a bullet only removes the one it hits. That is how the original worked, and it lets you shoot a narrow slit.',
+        },
+        {
+          q: 'How many tanks are in a wave?',
+          a: 'Six, plus one more for every two waves. No more than four are on the field at once; the rest queue for a spawn point.',
+        },
+        {
+          q: 'Is there two-player mode?',
+          a: 'Not here — this is one player against the waves. For local two-player, try Split Duel.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'contra',
+    emoji: '🔫',
+    accent: '#22d3ee',
+    categories: ['arcade', 'shooter', 'platformer', 'retro'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Десант',
+      slug: 'desant',
+      short: 'Беги вправо, стреляй в восьми направлениях и дойди до босса с одной жизнью за раз.',
+      metaTitle: 'Десант — игра как Контра на Денди, играть онлайн бесплатно | GamesIO',
+      metaDescription:
+        'Беги-и-стреляй в духе Contra: восемь направлений огня, смерть от одного попадания, сквозные платформы, бонус на разброс и босс в конце уровня. Играть бесплатно.',
+      keywords: ['контра игра', 'contra денди', 'беги и стреляй', 'платформер стрелялка онлайн', 'контра играть бесплатно'],
+      about: [
+        'Contra 1987 года собрала жанр из трёх решений: стрельба в восьми направлениях, смерть от одного попадания и уровень, который тянется вправо и заканчивается боссом. Комбинация оказалась настолько жёсткой и честной, что игру помнят до сих пор — в том числе за код на тридцать жизней.',
+        'Здесь всё три на месте. Прицел встаёт по крестовине: вверх, вниз в прыжке и четыре диагонали. Сквозные платформы проходятся снизу, а «вниз плюс прыжок» роняет вас на ярус ниже — без этого на многоярусной карте не развернуться. Одно попадание — минус жизнь, поэтому бонус на разброс важнее любой тактики.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — бег, <kbd>↑</kbd> <kbd>↓</kbd> — прицел',
+        '<kbd>Пробел</kbd> — прыжок, <kbd>↓</kbd> + прыжок — вниз сквозь платформу',
+        '<kbd>Shift</kbd> или касание — огонь',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+      ],
+      tips: [
+        'Стреляйте не переставая: патроны бесконечны, а лишняя пуля в воздухе часто снимает того, кого вы ещё не увидели.',
+        'Диагональ вниз работает только в прыжке — это единственный способ достать пехоту с верхнего яруса.',
+        'Бонус <b>S</b> даёт разброс на 14 секунд. С ним босса разбирают вдвое быстрее, поэтому к нему стоит подойти с бонусом.',
+        'Турели не двигаются, но бьют с упреждением. Их проще проскочить в прыжке, чем расстреливать в лоб.',
+        'После смерти вы возрождаетесь чуть позади, а не в начале уровня — потерянные метры отыгрываются за секунды.',
+      ],
+      faq: [
+        {
+          q: 'Правда одно попадание — и смерть?',
+          a: 'Да, как в оригинале. Жизней три, и каждая заканчивается от любой пули или касания врага.',
+        },
+        {
+          q: 'Как стрелять по диагонали вниз?',
+          a: 'Только в прыжке: удерживайте «вниз» и сторону движения. На земле «вниз» уходит в приседание.',
+        },
+        {
+          q: 'Что в конце уровня?',
+          a: 'Босс с полосой здоровья, который бьёт веером из трёх пуль. За него дают три тысячи очков плюс премию за оставшиеся жизни.',
+        },
+        {
+          q: 'Сколько идёт уровень?',
+          a: 'Около минуты на пробежку, если не задерживаться. Полоса внизу экрана показывает, сколько осталось.',
+        },
+      ],
+    },
+    en: {
+      title: 'Jungle Strike',
+      slug: 'jungle-strike',
+      short: 'Run right, shoot in eight directions and reach the boss on a one-hit life.',
+      metaTitle: 'Jungle Strike — Contra-style run and gun online free | GamesIO',
+      metaDescription:
+        'Run-and-gun in the spirit of Contra: eight-way fire, one-hit deaths, drop-through platforms, a spread-gun pickup and a boss at the end. Play free in your browser.',
+      keywords: ['contra game online', 'run and gun game', 'nes shooter browser', 'platform shooter free', 'retro run and gun'],
+      about: [
+        'Contra in 1987 built the genre out of three decisions: eight-way fire, death in one hit, and a level that runs right and ends with a boss. The combination was harsh and fair enough that people still remember it — including the thirty-lives code.',
+        'All three are here. The aim snaps to the d-pad: up, down while airborne, and four diagonals. Platforms are passed from below, and “down plus jump” drops you a tier — without it a multi-level map is unplayable. One hit costs a life, which makes the spread pickup worth more than any tactic.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — run, <kbd>↑</kbd> <kbd>↓</kbd> — aim',
+        '<kbd>Space</kbd> — jump, <kbd>↓</kbd> + jump — drop through a platform',
+        '<kbd>Shift</kbd> or touch — fire',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+      ],
+      tips: [
+        'Never stop firing: ammo is infinite, and a stray bullet often kills something you have not spotted yet.',
+        'Down-diagonal only works in the air — it is the only way to hit infantry from the tier above.',
+        'The <b>S</b> pickup gives spread fire for 14 seconds. It halves the boss fight, so try to arrive still holding it.',
+        'Turrets do not move but they lead their shots. Jumping past them is easier than trading fire head-on.',
+        'After a death you respawn slightly behind, not at the start — the lost ground takes seconds to recover.',
+      ],
+      faq: [
+        {
+          q: 'Is it really one hit and you die?',
+          a: 'Yes, as in the original. You get three lives and each ends to any bullet or enemy contact.',
+        },
+        {
+          q: 'How do I shoot down-diagonally?',
+          a: 'Only while airborne: hold down plus your direction of travel. On the ground, down means crouch.',
+        },
+        {
+          q: 'What is at the end of the level?',
+          a: 'A boss with a health bar that fires a three-shot fan. It pays three thousand points plus a bonus for lives in hand.',
+        },
+        {
+          q: 'How long is the level?',
+          a: 'About a minute if you keep moving. The bar at the bottom of the screen shows how much is left.',
+        },
+      ],
+    },
+  },
+  {
+    id: 'sonic',
+    emoji: '💙',
+    accent: '#2563eb',
+    categories: ['arcade', 'platformer', 'retro'],
+    released: '2026-08-04',
+    ru: {
+      title: 'Ёжик',
+      slug: 'yozhik',
+      short: 'Скоростной платформер: разгон под горку, клубок, кольца вместо здоровья.',
+      metaTitle: 'Ёжик — игра как Соник, играть онлайн бесплатно | GamesIO',
+      metaDescription:
+        'Скоростной платформер в духе Sonic: инерция и уклоны, разгон в клубке, кольца вместо полоски здоровья, пружины и трамплины. Играть в браузере бесплатно.',
+      keywords: ['соник игра', 'sonic играть онлайн', 'ёжик игра', 'скоростной платформер', 'соник бесплатно браузер'],
+      about: [
+        'Sonic 1991 года отличался от других платформеров одной вещью — уклоном. Земля здесь не набор ступенек, а кривая, и скорость зависит от того, куда эта кривая наклонена. Вниз ёж разгоняется сам, вверх теряет ход, и вся игра превращается в поиск траектории, на которой скорость не теряется.',
+        'Поэтому уровень тут сделан не из тайлов, а из рельефа: для каждой колонки задана высота земли. В клубке трение почти исчезает, и накопленная на спуске скорость несёт через следующую горку — это главный приём. Кольца работают как броня: пока есть хоть одно, попадание не убивает, а рассыпает их по земле.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — бег',
+        '<kbd>Пробел</kbd> или <kbd>↑</kbd> — прыжок',
+        '<kbd>↓</kbd> на скорости — свернуться в клубок',
+        '<kbd>P</kbd> или <kbd>Esc</kbd> — пауза',
+      ],
+      tips: [
+        'Не тормозите перед горкой — наоборот, разгонитесь на спуске перед ней: инерция вынесет наверх сама.',
+        'Клубок почти не тормозит, но им нельзя рулить. Сворачивайтесь на спуске и разворачивайтесь только на ровном.',
+        'Одно кольцо спасает от смерти так же, как двадцать. Но собранные кольца дают очки, а рассыпанные — нет.',
+        'Врага можно снять сверху в прыжке или протаранить в клубке. В обычном беге касание отнимает кольца.',
+        'За финиш дают премию за время: пробежать уровень за минуту выгоднее, чем собрать все кольца за три.',
+      ],
+      faq: [
+        {
+          q: 'Почему ёж разгоняется сам под горку?',
+          a: 'Уклон добавляется к скорости каждый кадр — так же, как в оригинале. На спуске он прибавляет, на подъёме отнимает, поэтому траектория важнее кнопок.',
+        },
+        {
+          q: 'Зачем нужны кольца?',
+          a: 'Это здоровье. Пока есть хоть одно, попадание только рассыпает кольца. Без колец следующее попадание отнимает жизнь.',
+        },
+        {
+          q: 'Как свернуться в клубок?',
+          a: 'Нажмите «вниз» на скорости выше пешей. В клубке трение почти исчезает, но управление пропадает до остановки.',
+        },
+        {
+          q: 'Уровень один?',
+          a: 'Да, но он длинный и заканчивается финишным столбом. Очки складываются из колец, врагов и премии за время.',
+        },
+      ],
+    },
+    en: {
+      title: 'Blue Dash',
+      slug: 'blue-dash',
+      short: 'Speed platformer: momentum on slopes, spin roll and rings instead of health.',
+      metaTitle: 'Blue Dash — Sonic-style speed platformer online free | GamesIO',
+      metaDescription:
+        'Speed platformer in the spirit of Sonic: slope momentum, a spin roll that keeps your speed, rings instead of a health bar, springs and ramps. Play free in your browser.',
+      keywords: ['sonic game online', 'speed platformer', 'hedgehog game free', 'retro platformer browser', 'sonic style game'],
+      about: [
+        'Sonic in 1991 differed from every other platformer in one way: slope. The ground is a curve rather than a staircase, and your speed depends on which way that curve tilts. Downhill you accelerate on your own, uphill you bleed speed, and the whole game becomes a hunt for the line that keeps momentum.',
+        'That is why this level is built from terrain rather than tiles: every column has a ground height. Rolling nearly removes friction, so the speed you banked on a descent carries you over the next hill — that is the core trick. Rings act as armour: while you hold even one, a hit scatters them instead of killing you.',
+      ],
+      controls: [
+        '<kbd>←</kbd> <kbd>→</kbd> — run',
+        '<kbd>Space</kbd> or <kbd>↑</kbd> — jump',
+        '<kbd>↓</kbd> at speed — curl into a roll',
+        '<kbd>P</kbd> or <kbd>Esc</kbd> — pause',
+      ],
+      tips: [
+        'Do not brake before a hill — build speed on the descent in front of it and momentum will carry you over.',
+        'Rolling barely slows you but you cannot steer. Curl on descents and uncurl only on the flat.',
+        'One ring saves you exactly as well as twenty. But collected rings score points and scattered ones do not.',
+        'Enemies die to a jump from above or to a roll. Touching one while simply running costs you your rings.',
+        'The finish pays a time bonus, so a one-minute run beats collecting every ring in three.',
+      ],
+      faq: [
+        {
+          q: 'Why does the hedgehog speed up downhill on its own?',
+          a: 'The slope is added to your speed every frame, exactly as in the original. It gives on descents and takes on climbs, which makes your line matter more than your buttons.',
+        },
+        {
+          q: 'What are the rings for?',
+          a: 'They are your health. While you hold at least one, a hit only scatters them. With no rings, the next hit costs a life.',
+        },
+        {
+          q: 'How do I roll?',
+          a: 'Press down while moving faster than a walk. Rolling nearly removes friction but you lose steering until you stop.',
+        },
+        {
+          q: 'Is there only one level?',
+          a: 'Yes, but it is long and ends at a goal post. Your score combines rings, enemies and a time bonus.',
+        },
+      ],
+    },
+  },
+  {
     id: 'moto3d',
     emoji: '🏁',
     accent: '#22d3ee',
@@ -928,6 +1233,7 @@ const SCRIPTS = [
   'src/js/engine.js',
   'src/js/lib/scores.js',
   'src/js/lib/pwa.js',
+  'src/js/lib/tilemap.js',
   'src/js/lib/road.js',
   'src/js/lib/racer.js',
   'src/js/games/arkanoid.js',
@@ -937,6 +1243,9 @@ const SCRIPTS = [
   'src/js/games/cars3d.js',
   'src/js/games/duel3d.js',
   'src/js/games/planes.js',
+  'src/js/games/tanks.js',
+  'src/js/games/contra.js',
+  'src/js/games/sonic.js',
   'src/js/ads.js',
   'src/js/app.js',
   'src/js/ui.js',

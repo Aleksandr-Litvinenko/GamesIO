@@ -1,7 +1,7 @@
 {
   "site": "GamesIO",
   "url": "https://aleksandr-litvinenko.github.io/GamesIO",
-  "updated": "2026-08-04",
+  "updated": "2026-08-05",
   "games": [
     {
       "id": "arkanoid",
@@ -143,6 +143,116 @@
             "аркадный шутер онлайн",
             "1942 игра",
             "самолеты стрелялка браузер"
+          ]
+        }
+      }
+    },
+    {
+      "id": "tanks",
+      "emoji": "🚜",
+      "categories": [
+        "arcade",
+        "strategy",
+        "retro",
+        "classic"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Battle Tanks",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/battle-tanks/",
+          "summary": "Defend the base, blast through brick and stop the tanks rolling in from the top.",
+          "keywords": [
+            "battle city game",
+            "tank game online",
+            "nes tanks",
+            "battle tanks free",
+            "retro tank game"
+          ]
+        },
+        "ru": {
+          "title": "Танчики",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/tanchiki/",
+          "summary": "Держи базу, круши кирпич и не пропусти танки с верхнего края.",
+          "keywords": [
+            "танчики",
+            "танчики играть",
+            "battle city онлайн",
+            "танки денди",
+            "танчики бесплатно"
+          ]
+        }
+      }
+    },
+    {
+      "id": "contra",
+      "emoji": "🔫",
+      "categories": [
+        "arcade",
+        "shooter",
+        "platformer",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Jungle Strike",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/jungle-strike/",
+          "summary": "Run right, shoot in eight directions and reach the boss on a one-hit life.",
+          "keywords": [
+            "contra game online",
+            "run and gun game",
+            "nes shooter browser",
+            "platform shooter free",
+            "retro run and gun"
+          ]
+        },
+        "ru": {
+          "title": "Десант",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/desant/",
+          "summary": "Беги вправо, стреляй в восьми направлениях и дойди до босса с одной жизнью за раз.",
+          "keywords": [
+            "контра игра",
+            "contra денди",
+            "беги и стреляй",
+            "платформер стрелялка онлайн",
+            "контра играть бесплатно"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sonic",
+      "emoji": "💙",
+      "categories": [
+        "arcade",
+        "platformer",
+        "retro"
+      ],
+      "released": "2026-08-04",
+      "locales": {
+        "en": {
+          "title": "Blue Dash",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/blue-dash/",
+          "summary": "Speed platformer: momentum on slopes, spin roll and rings instead of health.",
+          "keywords": [
+            "sonic game online",
+            "speed platformer",
+            "hedgehog game free",
+            "retro platformer browser",
+            "sonic style game"
+          ]
+        },
+        "ru": {
+          "title": "Ёжик",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/yozhik/",
+          "summary": "Скоростной платформер: разгон под горку, клубок, кольца вместо здоровья.",
+          "keywords": [
+            "соник игра",
+            "sonic играть онлайн",
+            "ёжик игра",
+            "скоростной платформер",
+            "соник бесплатно браузер"
           ]
         }
       }

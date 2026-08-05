@@ -1,5 +1,6 @@
 /* Шаблоны страниц. Чистые функции: получают данные из content.js и отдают HTML. */
 
+const fs = require('fs');
 const path = require('path');
 const { SITE, UI, CATEGORIES, GAMES, SCRIPTS } = require('./content');
 
@@ -9,6 +10,10 @@ const esc = (s) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
+
+/* Обложки лежат в docs/og и генерируются отдельно (tools/og.js) */
+const hasCover = (id) =>
+  fs.existsSync(path.join(__dirname, '..', 'docs', 'og', id + '.png'));
 
 /* Текст без разметки — для мета-тегов и JSON-LD */
 const plain = (s) => String(s).replace(/<[^>]+>/g, '');
@@ -452,7 +457,8 @@ function gamePage(locale, game) {
     title: c.metaTitle,
     description: c.metaDescription,
     keywords: c.keywords,
-    image: `og/${game.id}.png`,
+    // своя обложка, если она нарисована; иначе общая — лучше, чем битая ссылка
+    image: hasCover(game.id) ? `og/${game.id}.png` : 'og/cover.png',
     alternates: Object.fromEntries(
       Object.keys(SITE.locales).map((l) => [l, gamePath(l, game)])
     ),

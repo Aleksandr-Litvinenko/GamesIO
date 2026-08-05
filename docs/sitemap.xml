@@ -3,7 +3,7 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/"/>
@@ -11,7 +11,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/breakout/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/breakout/"/>
@@ -19,7 +19,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/snake/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/"/>
@@ -27,7 +27,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
@@ -35,15 +35,39 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/"/>
   </url>
   <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/battle-tanks/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/battle-tanks/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/tanchiki/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/jungle-strike/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/jungle-strike/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/desant/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/blue-dash/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/blue-dash/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/yozhik/"/>
+  </url>
+  <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/"/>
@@ -51,7 +75,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/"/>
@@ -59,7 +83,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/split-duel/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/split-duel/"/>
@@ -67,7 +91,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/"/>
@@ -75,7 +99,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/breakout/"/>
@@ -83,7 +107,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/snake/"/>
@@ -91,7 +115,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/"/>
@@ -99,15 +123,39 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/"/>
   </url>
   <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/tanchiki/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/battle-tanks/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/tanchiki/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/desant/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/jungle-strike/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/desant/"/>
+  </url>
+  <url>
+    <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/yozhik/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/blue-dash/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://aleksandr-litvinenko.github.io/GamesIO/ru/yozhik/"/>
+  </url>
+  <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/moto-3d/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/motorbike-3d/"/>
@@ -115,7 +163,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/tachki-3d/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/coast-runner/"/>
@@ -123,7 +171,7 @@
   </url>
   <url>
     <loc>https://aleksandr-litvinenko.github.io/GamesIO/ru/duel-na-dvoih/</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://aleksandr-litvinenko.github.io/GamesIO/split-duel/"/>

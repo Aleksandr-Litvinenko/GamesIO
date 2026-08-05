@@ -8,7 +8,7 @@
  *
  * Файл собирается генератором: список ассетов и версия подставляются в сборке.
  */
-const VERSION = '26be477e57';
+const VERSION = 'a549e77039';
 const CACHE = 'gamesio-' + VERSION;
 const ASSETS = [
   "./",
@@ -16,6 +16,9 @@ const ASSETS = [
   "./snake/",
   "./light-cycles/",
   "./sky-squadron/",
+  "./battle-tanks/",
+  "./jungle-strike/",
+  "./blue-dash/",
   "./motorbike-3d/",
   "./coast-runner/",
   "./split-duel/",
@@ -24,6 +27,9 @@ const ASSETS = [
   "./ru/zmeyka/",
   "./ru/motocikly/",
   "./ru/samolyotiki/",
+  "./ru/tanchiki/",
+  "./ru/desant/",
+  "./ru/yozhik/",
   "./ru/moto-3d/",
   "./ru/tachki-3d/",
   "./ru/duel-na-dvoih/",
@@ -33,6 +39,7 @@ const ASSETS = [
   "./assets/engine.js",
   "./assets/scores.js",
   "./assets/pwa.js",
+  "./assets/tilemap.js",
   "./assets/road.js",
   "./assets/racer.js",
   "./assets/arkanoid.js",
@@ -42,6 +49,9 @@ const ASSETS = [
   "./assets/cars3d.js",
   "./assets/duel3d.js",
   "./assets/planes.js",
+  "./assets/tanks.js",
+  "./assets/contra.js",
+  "./assets/sonic.js",
   "./assets/ads.js",
   "./assets/app.js",
   "./assets/ui.js",
