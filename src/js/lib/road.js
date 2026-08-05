@@ -139,7 +139,7 @@
         const side = rnd() < 0.5 ? -1 : 1;
         this.segments[n].sprites.push({
           kind: kinds[Math.floor(rnd() * kinds.length)],
-          offset: side * (1.25 + rnd() * 1.6),
+          offset: side * (1.9 + rnd() * 1.4),
         });
       }
     }
@@ -362,11 +362,12 @@
     drawSprite(ctx, view, kind, scale, roadX, roadY, offset, clipY, fog, extra) {
       const painter = Arcade.Sprites[kind];
       if (!painter || !scale) return;
-      // 3.6 подобрано на глаз: дерево у обочины должно быть заметно выше
-      // машины, но не закрывать полдороги на ближнем плане
+      // Множитель на спрайт: машины должны быть соразмерны нашей, иначе
+      // встречный трафик выглядит игрушечным и в него врезаешься «в пустоту».
+      const k = 3.6 * (painter.scale || 1);
       const spriteScale = scale * view.w * 0.5;
-      const w = painter.w * spriteScale * 3.6;
-      const h = painter.h * spriteScale * 3.6;
+      const w = painter.w * spriteScale * k;
+      const h = painter.h * spriteScale * k;
       if (w < 0.8 || h < 0.8) return;
 
       const destX = view.x + roadX + spriteScale * offset * this.roadWidth - w / 2;
@@ -518,6 +519,8 @@
   sprite('car_blue', 88, 58, (ctx) => carBody(ctx, '#2563eb', '#0b1f4d', '#1e293b'));
   sprite('car_yellow', 88, 58, (ctx) => carBody(ctx, '#eab308', '#4a3609', '#1e293b'));
   sprite('car_white', 88, 58, (ctx) => carBody(ctx, '#e2e8f0', '#64748b', '#1e293b'));
+  // трафик крупнее декора: так видно, во что именно предстоит врезаться
+  ['car_red', 'car_blue', 'car_yellow', 'car_white'].forEach((k) => (S[k].scale = 1.5));
   sprite('truck', 104, 84, (ctx) => {
     ctx.fillStyle = '#1f2937';
     ctx.fillRect(6, 66, 92, 18);
@@ -532,6 +535,7 @@
     ctx.fillRect(14, 70, 12, 6);
     ctx.fillRect(78, 70, 12, 6);
   });
+  S.truck.scale = 1.5;
 
   /* Мотоцикл сзади: колесо, выхлопы, седок с плечами и руками на руле.
      Крен идёт вокруг точки контакта колеса с дорогой, а не вокруг центра —

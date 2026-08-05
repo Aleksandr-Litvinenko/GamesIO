@@ -11,7 +11,7 @@ English (default) and Russian.
 
 - [Breakout](https://aleksandr-litvinenko.github.io/GamesIO/breakout/): Clear every brick, catch power-ups and never drop the ball. Russian version: [Арканоид](https://aleksandr-litvinenko.github.io/GamesIO/ru/arkanoid/).
 - [Snake](https://aleksandr-litvinenko.github.io/GamesIO/snake/): Eat apples, grow longer and never bite yourself. Golden apples pay +50. Russian version: [Змейка](https://aleksandr-litvinenko.github.io/GamesIO/ru/zmeyka/).
-- [Light Cycles](https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/): Tron-style light cycles: leave a wall behind you and outlast three bots. Russian version: [Мотоциклы](https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/).
+- [Snake Wars](https://aleksandr-litvinenko.github.io/GamesIO/snake-wars/): Tron-style light cycles: leave a wall behind you and outlast three bots. Russian version: [Змеиные войны](https://aleksandr-litvinenko.github.io/GamesIO/ru/snake-wars/).
 - [Sky Squadron](https://aleksandr-litvinenko.github.io/GamesIO/sky-squadron/): Vertical scrolling shooter: waves, power-ups and a boss every fifth wave. Russian version: [Самолётики](https://aleksandr-litvinenko.github.io/GamesIO/ru/samolyotiki/).
 - [Battle Tanks](https://aleksandr-litvinenko.github.io/GamesIO/battle-tanks/): Defend the base, blast through brick and stop the tanks rolling in from the top. Russian version: [Танчики](https://aleksandr-litvinenko.github.io/GamesIO/ru/tanchiki/).
 - [Jungle Strike](https://aleksandr-litvinenko.github.io/GamesIO/jungle-strike/): Run right, shoot in eight directions and reach the boss on a one-hit life. Russian version: [Десант](https://aleksandr-litvinenko.github.io/GamesIO/ru/desant/).

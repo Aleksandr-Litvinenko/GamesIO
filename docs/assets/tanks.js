@@ -30,6 +30,18 @@
   const WATER = 3;
   const TREE = 4;
 
+  /* Бонусы падают с «мигающих» танков — как в оригинале.
+     Звезда усиливает пушку навсегда до конца партии, лопата чинит стены
+     вокруг базы, граната сносит всех на поле. */
+  const BONUS = {
+    star: { color: '#fbbf24', sign: '★' },
+    helmet: { color: '#22d3ee', sign: '⛑' },
+    shovel: { color: '#a3e635', sign: '⛏' },
+    grenade: { color: '#f87171', sign: '✹' },
+    life: { color: '#f472b6', sign: '♥' },
+  };
+  const BONUS_KINDS = Object.keys(BONUS);
+
   const DIRS = [
     { x: 0, y: -1 }, // 0 вверх
     { x: 1, y: 0 },
@@ -49,6 +61,9 @@
       this.bullets = [];
       this.spawnQueue = 0;
       this.spawnTimer = 1;
+      this.gunLevel = 1; // 1 — обычная пушка, 2 — быстрая, 3 — две пули
+      this.bonuses = [];
+      this.shovelTimer = 0;
       this.waveBreak = 1.2;
       this.betweenWaves = true;
       this.syncInfo();
@@ -157,6 +172,8 @@
         e.hp = 1 + Math.floor(this.wave / 4);
         e.color = e.hp > 1 ? '#f472b6' : '#e2e8f0';
         e.speed = 60 + this.wave * 4 + Math.random() * 25;
+        // каждый третий танк — «бонусный»: с него падает улучшение
+        e.carries = this.enemies.length === 0 && Math.random() < 0.55;
         this.enemies.push(e);
         this.spawnQueue -= 1;
         this.g.fx.burst(x + TANK / 2, y + TANK / 2, {
@@ -174,6 +191,7 @@
       this.g.setInfo({
         lives: '❤'.repeat(Math.max(0, this.lives)) || '—',
         wave: this.wave,
+        weapon: 'lvl ' + this.gunLevel,
         base: this.baseAlive ? '🦅' : '💥',
       });
     }
@@ -184,6 +202,7 @@
       this.updatePlayer(dt);
       this.updateEnemies(dt);
       this.updateBullets(dt);
+      this.updateBonuses(dt);
 
       if (this.betweenWaves) {
         this.waveBreak -= dt;
@@ -264,15 +283,20 @@
 
     fire(t) {
       if (t.cooldown > 0) return;
-      t.cooldown = t.isPlayer ? 0.36 : 0.9 + Math.random() * 0.7;
+      const lvl = t.isPlayer ? this.gunLevel : 1;
+      t.cooldown = t.isPlayer ? 0.36 - (lvl - 1) * 0.09 : 0.9 + Math.random() * 0.7;
       const d = DIRS[t.dir];
-      this.bullets.push({
-        x: t.x + TANK / 2 + d.x * TANK * 0.55,
-        y: t.y + TANK / 2 + d.y * TANK * 0.55,
-        vx: d.x * (t.isPlayer ? BULLET_SPEED : ENEMY_BULLET_SPEED),
-        vy: d.y * (t.isPlayer ? BULLET_SPEED : ENEMY_BULLET_SPEED),
-        mine: t.isPlayer,
-      });
+      const speed = (t.isPlayer ? BULLET_SPEED : ENEMY_BULLET_SPEED) * (lvl >= 2 ? 1.3 : 1);
+      const shots = lvl >= 3 ? [-7, 7] : [0];
+      for (const off of shots) {
+        this.bullets.push({
+          x: t.x + TANK / 2 + d.x * TANK * 0.55 - d.y * off,
+          y: t.y + TANK / 2 + d.y * TANK * 0.55 + d.x * off,
+          vx: d.x * speed,
+          vy: d.y * speed,
+          mine: t.isPlayer,
+        });
+      }
       this.g.sfx('blip');
     }
 
@@ -402,6 +426,7 @@
             this.g.sfx('bounce');
             return true;
           }
+          if (e.carries) this.dropBonus(e.x, e.y);
           this.enemies.splice(i, 1);
           this.g.addScore(100);
           this.g.sfx('bounce');
@@ -423,6 +448,67 @@
         }
       }
       return false;
+    }
+
+    dropBonus(x, y) {
+      const kind = BONUS_KINDS[Math.floor(Math.random() * BONUS_KINDS.length)];
+      this.bonuses.push({ x: x, y: y, kind: kind, life: 18, spin: 0 });
+      this.g.sfx('power');
+    }
+
+    updateBonuses(dt) {
+      for (let i = this.bonuses.length - 1; i >= 0; i--) {
+        const b = this.bonuses[i];
+        b.life -= dt;
+        b.spin += dt * 3;
+        if (b.life <= 0) {
+          this.bonuses.splice(i, 1);
+          continue;
+        }
+        const p = this.player;
+        if (Math.abs(b.x - p.x) > TANK || Math.abs(b.y - p.y) > TANK) continue;
+        this.bonuses.splice(i, 1);
+        this.applyBonus(b.kind);
+      }
+      if (this.shovelTimer > 0) {
+        this.shovelTimer -= dt;
+        if (this.shovelTimer <= 0) this.setBaseWall(BRICK);
+      }
+    }
+
+    applyBonus(kind) {
+      const p = this.player;
+      if (kind === 'star') this.gunLevel = Math.min(3, this.gunLevel + 1);
+      else if (kind === 'helmet') p.invuln = 12;
+      else if (kind === 'shovel') {
+        this.setBaseWall(STEEL);
+        this.shovelTimer = 20;
+      } else if (kind === 'grenade') {
+        for (const e of this.enemies.slice()) {
+          this.g.fx.burst(e.x + TANK / 2, e.y + TANK / 2, {
+            count: 18,
+            color: ['#fbbf24', '#ffffff'],
+            speed: 220,
+            life: 0.5,
+            size: 4,
+          });
+        }
+        this.g.addScore(100 * this.enemies.length);
+        this.enemies.length = 0;
+        this.g.shake(16);
+      } else if (kind === 'life') this.lives += 1;
+      this.g.addScore(200);
+      this.g.sfx('power');
+      this.syncInfo();
+    }
+
+    // Стена вокруг базы: лопата превращает её в броню, потом возвращает кирпич
+    setBaseWall(kind) {
+      const around = [[5, 11], [6, 11], [7, 11], [5, 12], [7, 12]];
+      for (const [c, r] of around) {
+        for (let dy = 0; dy < 2; dy++)
+          for (let dx = 0; dx < 2; dx++) this.field[(r * 2 + dy) * this.n + (c * 2 + dx)] = kind;
+      }
     }
 
     hitPlayer() {
@@ -493,6 +579,24 @@
       this.drawBase(ctx);
       for (const t of this.tanks()) this.drawTank(ctx, t);
 
+      for (const b of this.bonuses) {
+        const meta = BONUS[b.kind];
+        const blink = b.life < 4 && Math.sin(b.life * 14) < 0;
+        if (blink) continue;
+        ctx.save();
+        ctx.translate(b.x + TANK / 2, b.y + TANK / 2);
+        ctx.scale(Math.max(0.35, Math.abs(Math.cos(b.spin))), 1);
+        ctx.fillStyle = meta.color;
+        Arcade.roundRect(ctx, -15, -13, 30, 26, 7);
+        ctx.fill();
+        ctx.fillStyle = '#0b1120';
+        ctx.font = 'bold 15px system-ui';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(meta.sign, 0, 1);
+        ctx.restore();
+      }
+
       ctx.fillStyle = '#fde68a';
       for (const b of this.bullets) {
         ctx.beginPath();
@@ -533,6 +637,14 @@
     drawTank(ctx, t) {
       if (t.invuln > 0 && Math.floor(t.invuln * 12) % 2 === 0) return;
       const s = TANK;
+      // бонусный танк мигает — по нему видно, кого выгодно подбить первым
+      if (t.carries && Math.floor(Date.now() / 160) % 2) {
+        ctx.save();
+        ctx.globalAlpha = 0.35;
+        ctx.fillStyle = '#fbbf24';
+        ctx.fillRect(t.x - 3, t.y - 3, s + 6, s + 6);
+        ctx.restore();
+      }
       ctx.save();
       ctx.translate(t.x + s / 2, t.y + s / 2);
       ctx.rotate((t.dir * Math.PI) / 2);

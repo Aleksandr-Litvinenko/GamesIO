@@ -168,7 +168,10 @@ function runtimeConfig(locale, rel) {
     scope: rel,
     dataUrl: rel + 'data/',
     repo: SITE.repo,
-    t: t.game,
+    // Словарь для Arcade.t: и строки интерфейса, и строки внутри канваса.
+    // Раньше сюда уходил только t.game, поэтому ui.js показывал ключи
+    // вместо текста — «outsideTop» вместо «Вы на 15-м месте».
+    t: Object.assign({}, t, t.game, { game: undefined }),
     games: Object.fromEntries(
       GAMES.map((g) => [
         g.id,
@@ -350,12 +353,8 @@ function gamePage(locale, game) {
     ${adSlot('side', t).replace('<div class="shell">', '<div>')}
     <section class="side-card" id="leaderboard">
       <h2>${esc(t.leaderboard)}</h2>
-      <div class="tabs" role="tablist">
-        <button type="button" class="tab is-on" data-tab="local">${esc(t.tabLocal)}</button>
-        <button type="button" class="tab" data-tab="global">${esc(t.tabGlobal)}</button>
-      </div>
-      <div data-pane="local"></div>
-      <div data-pane="global" hidden></div>
+      <div data-pane="global"></div>
+      <div class="me-block" data-slot="me"></div>
     </section>
 
     <section class="side-card">

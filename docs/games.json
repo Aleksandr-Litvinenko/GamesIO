@@ -86,26 +86,26 @@
       "released": "2026-08-04",
       "locales": {
         "en": {
-          "title": "Light Cycles",
-          "url": "https://aleksandr-litvinenko.github.io/GamesIO/light-cycles/",
+          "title": "Snake Wars",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/snake-wars/",
           "summary": "Tron-style light cycles: leave a wall behind you and outlast three bots.",
           "keywords": [
+            "snake wars game",
             "light cycles game",
             "tron game online",
-            "light bike game",
-            "tron light cycle",
-            "snake vs bots"
+            "snake vs bots",
+            "light bike game"
           ]
         },
         "ru": {
-          "title": "Мотоциклы",
-          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/motocikly/",
+          "title": "Змеиные войны",
+          "url": "https://aleksandr-litvinenko.github.io/GamesIO/ru/snake-wars/",
           "summary": "Световые мотоциклы: оставляй стену за собой и переживи трёх ботов.",
           "keywords": [
+            "змеиные войны",
             "световые мотоциклы",
             "трон игра",
-            "tron мотоциклы",
-            "игра мотоциклы онлайн",
+            "snake wars",
             "змейка против ботов"
           ]
         }

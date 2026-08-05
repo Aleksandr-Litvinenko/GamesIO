@@ -182,15 +182,28 @@
       return 0;
     }
 
+    /* Полуширина спрайта в единицах дороги: 1.0 — половина полотна.
+       Раньше здесь стояли константы 0.45 и 0.9, из-за чего игрок врезался
+       в дерево, стоя ещё на асфальте, а мимо машины проезжал насквозь. */
+    spriteHalfWidth(kind) {
+      const painter = Arcade.Sprites[kind];
+      if (!painter) return 0.3;
+      return (painter.w * 3.6 * (painter.scale || 1)) / (2 * this.road.roadWidth);
+    }
+
     checkCollisions(seg) {
+      const me = 0.22; // полуширина нашей машины
       for (const car of seg.cars) {
-        if (Math.abs(this.playerX - car.offset) >= 0.45) continue;
+        if (Math.abs(this.playerX - car.offset) >= me + this.spriteHalfWidth(car.kind)) continue;
         if (this.speed <= car.speed) continue;
         this.crash(car);
         return;
       }
+      // Обочина: врезаться можно только съехав с полотна, иначе столкновение
+      // выглядит как удар в пустоту
+      if (Math.abs(this.playerX) < 0.95) return;
       for (const sp of seg.sprites) {
-        if (Math.abs(this.playerX - sp.offset) >= 0.9) continue;
+        if (Math.abs(this.playerX - sp.offset) >= me + this.spriteHalfWidth(sp.kind)) continue;
         this.crash(null);
         return;
       }

@@ -83,6 +83,10 @@
       this.facing = 1;
       this.fireCooldown = 0;
       this.invuln = 1.5;
+      // Буфер нажатия и «койот-тайм»: без них прыжок теряется, если нажать
+      // за миг до приземления или через миг после схода с края.
+      this.jumpBuffer = 0;
+      this.coyote = 0;
 
       this.spawnFromLevel();
       this.player = new Arcade.Body(this.startX, this.startY, 20, 30);
@@ -172,7 +176,13 @@
       else if (down && !p.onGround) this.aim = { x: 0, y: 1 };
       else this.aim = { x: this.facing, y: 0 };
 
-      if (g.pressed('action') && p.onGround) {
+      if (g.pressed('action') || g.pressed('up')) this.jumpBuffer = 0.13;
+      this.jumpBuffer = Math.max(0, this.jumpBuffer - dt);
+      this.coyote = p.onGround ? 0.1 : Math.max(0, this.coyote - dt);
+
+      if (this.jumpBuffer > 0 && this.coyote > 0) {
+        this.jumpBuffer = 0;
+        this.coyote = 0;
         // «вниз + прыжок» проваливает сквозь платформу
         if (down) p.y += 3;
         else {
@@ -184,7 +194,7 @@
       p.x = Arcade.clamp(p.x, 0, this.map.pixelW - p.w);
 
       this.fireCooldown -= dt;
-      const shooting = g.held('boost') || g.pointer.down || g.held('action');
+      const shooting = true; // патроны бесконечны, огонь идёт всегда
       if (shooting && this.fireCooldown <= 0) {
         this.fire();
         this.fireCooldown = FIRE_RATE;

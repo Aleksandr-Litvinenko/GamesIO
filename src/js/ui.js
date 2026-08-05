@@ -157,35 +157,42 @@
     </li>`;
   }
 
+  /* Таблица одна — общая. Вкладки «на устройстве» больше нет: игроку важно
+     видеть, где он среди всех, а не среди самого себя. Свой лучший результат
+     и своё место показываются отдельной строкой под списком, в том числе
+     когда до первой десятки не хватило. */
   function paintBoards() {
     if (!board || !gameId) return;
-    const local = Arcade.Scores.localTop(gameId, 10);
-    const localHtml = local.length
-      ? `<ol class="board">${local
-          .map((r, i) => row(i, r.name, r.score, r.color))
-          .join('')}</ol>`
-      : `<p class="dim">${t('noScoresYet')}</p>`;
-    board.querySelector('[data-pane="local"]').innerHTML = localHtml;
+    const list = board.querySelector('[data-pane="global"]');
+    const mine = board.querySelector('[data-slot="me"]');
+    const best = Arcade.highScore(gameId);
+    const me = Arcade.Profile.current();
 
-    const globalPane = board.querySelector('[data-pane="global"]');
-    Arcade.Scores.globalTop(gameId, 10).then((rows) => {
-      globalPane.innerHTML = rows.length
-        ? `<ol class="board">${rows
-            .map((r, i) => row(i, r.name, r.score, null, r.avatar))
-            .join('')}</ol>`
-        : `<p class="dim">${t('globalEmpty')}</p>`;
-    });
-  }
+    Arcade.Scores.loadGlobal().then((data) => {
+      const rows = (data.games[gameId] || []).slice(0, 10);
+      list.innerHTML = rows.length
+        ? `<ol class="board">${rows.map((r, i) => row(i, r.name, r.score, null, r.avatar)).join('')}</ol>`
+        : `<p class="dim">${data.offline ? t('boardOffline') : t('globalEmpty')}</p>`;
 
-  if (board) {
-    paintBoards();
-    board.addEventListener('click', (e) => {
-      const tab = e.target.closest('[data-tab]');
-      if (!tab) return;
-      board.querySelectorAll('[data-tab]').forEach((b) => b.classList.toggle('is-on', b === tab));
-      board.querySelectorAll('[data-pane]').forEach((p) => {
-        p.hidden = p.dataset.pane !== tab.dataset.tab;
-      });
+      if (!mine) return;
+      if (!best) {
+        mine.innerHTML = `<p class="dim">${t('noScoresYet')}</p>`;
+        return;
+      }
+      // ранг считаем по всей таблице, а не по показанной десятке
+      const all = data.games[gameId] || [];
+      const ahead = all.filter((r) => r.score > best).length;
+      const inTop = rows.some((r) => r.score <= best) && ahead < 10;
+      mine.innerHTML = `
+        <div class="me-row${inTop ? ' is-top' : ''}">
+          <span class="place">${all.length ? '#' + (ahead + 1) : '—'}</span>
+          <i class="ava dot" style="background:${me.color}"></i>
+          <span class="who">${esc(me.name)}</span>
+          <span class="pts">${best}</span>
+        </div>
+        <p class="dim">${
+          all.length && ahead >= 10 ? t('outsideTop', { n: ahead + 1 }) : t('yourBest')
+        }</p>`;
     });
   }
 
@@ -193,12 +200,8 @@
 
   // Движок зовёт этот хук, когда рисует экран окончания игры
   Arcade.overlayExtra = function (host) {
-    const place = host.lastPlace;
     const url = Arcade.Scores.publishUrl(host.def.id, host.score);
     const parts = [];
-    if (place > 0) {
-      parts.push(`<p class="place-note">${t('placeInTable', { n: place })}</p>`);
-    }
     if (url && host.score > 0) {
       parts.push(
         `<a class="btn ghost publish" href="${url}" target="_blank" rel="noopener">${t(

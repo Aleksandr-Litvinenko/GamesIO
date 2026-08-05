@@ -8,13 +8,13 @@
  *
  * Файл собирается генератором: список ассетов и версия подставляются в сборке.
  */
-const VERSION = 'a549e77039';
+const VERSION = 'aff0d8aa06';
 const CACHE = 'gamesio-' + VERSION;
 const ASSETS = [
   "./",
   "./breakout/",
   "./snake/",
-  "./light-cycles/",
+  "./snake-wars/",
   "./sky-squadron/",
   "./battle-tanks/",
   "./jungle-strike/",
@@ -25,7 +25,7 @@ const ASSETS = [
   "./ru/",
   "./ru/arkanoid/",
   "./ru/zmeyka/",
-  "./ru/motocikly/",
+  "./ru/snake-wars/",
   "./ru/samolyotiki/",
   "./ru/tanchiki/",
   "./ru/desant/",

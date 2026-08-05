@@ -800,3 +800,19 @@ kbd {
   .offline-badge { display: none; }
   .profile-chip { max-width: 96px; }
 }
+
+.me-block { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.me-block .dim { margin: 8px 0 0; color: var(--muted); font-size: 0.76rem; }
+.me-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 8px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in oklab, var(--accent) 45%, transparent);
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  font-size: 0.84rem;
+}
+.me-row .place { width: 30px; flex: none; text-align: center; font-family: var(--mono); font-size: 0.76rem; color: var(--accent); }
+.me-row .who { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.me-row .pts { font-family: var(--mono); font-variant-numeric: tabular-nums; }

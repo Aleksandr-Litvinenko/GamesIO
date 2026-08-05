@@ -270,6 +270,31 @@ write(
 `
 );
 
+/* Переименованная игра: со старых адресов уводим на новые, чтобы уже
+   проиндексированные ссылки не отдавали 404. */
+const RENAMED = [
+  ['light-cycles/', 'snake-wars/'],
+  ['ru/motocikly/', 'ru/snake-wars/'],
+];
+for (const [from, to] of RENAMED) {
+  const up = '../'.repeat(from.split('/').filter(Boolean).length);
+  write(
+    from + 'index.html',
+    `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moved — GamesIO</title>
+<link rel="canonical" href="${absolute(to)}">
+<meta name="robots" content="noindex, follow">
+<meta http-equiv="refresh" content="0; url=${up}${to}">
+</head>
+<body><p>This game moved to <a href="${up}${to}">${absolute(to)}</a>.</p></body>
+</html>
+`
+  );
+}
+
 /* Страница 404 — тот же каркас, чтобы человек не вываливался из сайта */
 write(
   '404.html',

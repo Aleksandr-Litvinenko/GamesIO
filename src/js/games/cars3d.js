@@ -40,9 +40,10 @@
     playerSprite: 'car_player',
     playerScale: 1.9,
     topKmh: 340,
-    startTime: 68,
-    checkpointBonus: 24,
-    checkpointEvery: 0.25,
+    startTime: 45,
+    checkpointBonus: 12, // раньше 24 — времени копилось столько,
+    // что таймер переставал быть ограничением и гонка теряла смысл
+    checkpointEvery: 0.2,
     tuning: {
       maxSpeed: MAX,
       accel: MAX / 5,

@@ -29,7 +29,8 @@
   class Sonic {
     constructor(g) {
       this.g = g;
-      this.buildLevel();
+      this.level = 0;
+      this.buildLevel(0);
       this.x = 120;
       this.y = this.heightAt(120) - BODY;
       this.vx = 0;
@@ -44,70 +45,114 @@
       this.time = 0;
       this.finished = false;
       this.spin = 0;
+      this.jumpBuffer = 0;
+      this.coyote = 0;
       this.syncInfo();
     }
 
     /* ---------------- рельеф ---------------- */
 
-    buildLevel() {
+    /* Пять карт: от пологой разминки до трассы, где без клубка не проехать.
+       Каждая — сценарий из кусков рельефа, поэтому добавить шестую значит
+       дописать один массив, а не рисовать уровень руками. */
+    static get MAPS() {
+      return [
+        {
+          name: 'green',
+          sky: ['#0ea5e9', '#a5f3fc'],
+          hills: '#166534',
+          ground: '#3f6212',
+          grass: '#65a30d',
+          script: [['flat', 60], ['hill', 70, 90], ['flat', 20], ['dip', 60, 70], ['flat', 15],
+                   ['hill', 90, 150], ['flat', 20], ['gap', 12], ['flat', 30], ['ramp', 50, -110],
+                   ['flat', 30], ['hill', 60, 70], ['dip', 70, 90], ['flat', 20], ['gap', 14],
+                   ['flat', 25], ['hill', 110, 190], ['flat', 20], ['ramp', 60, 120],
+                   ['dip', 80, 110], ['flat', 25], ['gap', 16], ['flat', 30], ['hill', 80, 120],
+                   ['flat', 30], ['dip', 60, 60], ['hill', 70, 100], ['flat', 80]],
+        },
+        {
+          name: 'desert',
+          sky: ['#f59e0b', '#fde68a'],
+          hills: '#92400e',
+          ground: '#a16207',
+          grass: '#eab308',
+          script: [['flat', 50], ['dip', 50, 60], ['hill', 60, 120], ['gap', 14], ['flat', 25],
+                   ['hill', 50, 80], ['dip', 50, 100], ['gap', 16], ['flat', 20],
+                   ['ramp', 40, -140], ['flat', 40], ['hill', 90, 170], ['gap', 18], ['flat', 25],
+                   ['ramp', 50, 140], ['dip', 60, 120], ['hill', 60, 90], ['gap', 14],
+                   ['flat', 30], ['hill', 100, 200], ['flat', 20], ['dip', 70, 90], ['flat', 70]],
+        },
+        {
+          name: 'night',
+          sky: ['#1e1b4b', '#4c1d95'],
+          hills: '#312e81',
+          ground: '#1e293b',
+          grass: '#38bdf8',
+          script: [['flat', 45], ['hill', 50, 130], ['gap', 16], ['flat', 20], ['dip', 40, 90],
+                   ['hill', 45, 110], ['gap', 18], ['flat', 18], ['ramp', 40, -160],
+                   ['flat', 25], ['dip', 50, 130], ['gap', 16], ['flat', 20], ['hill', 70, 180],
+                   ['gap', 18], ['flat', 22], ['ramp', 45, 160], ['hill', 55, 120],
+                   ['dip', 55, 110], ['gap', 16], ['flat', 30], ['hill', 90, 200], ['flat', 70]],
+        },
+        {
+          name: 'ice',
+          sky: ['#0891b2', '#e0f2fe'],
+          hills: '#0e7490',
+          ground: '#475569',
+          grass: '#e0f2fe',
+          script: [['flat', 40], ['ramp', 60, -180], ['flat', 20], ['dip', 70, 150],
+                   ['hill', 60, 140], ['gap', 18], ['flat', 20], ['ramp', 50, 180],
+                   ['dip', 60, 120], ['gap', 20], ['flat', 18], ['hill', 80, 210],
+                   ['gap', 18], ['flat', 20], ['dip', 80, 160], ['hill', 50, 120],
+                   ['gap', 20], ['flat', 25], ['ramp', 55, -150], ['flat', 30],
+                   ['hill', 70, 160], ['ramp', 55, 150], ['flat', 70]],
+        },
+        {
+          name: 'lava',
+          sky: ['#7f1d1d', '#f97316'],
+          hills: '#450a0a',
+          ground: '#292524',
+          grass: '#dc2626',
+          script: [['flat', 35], ['hill', 45, 150], ['gap', 20], ['flat', 16],
+                   ['dip', 40, 130], ['gap', 20], ['flat', 16], ['hill', 50, 170],
+                   ['gap', 22], ['flat', 18], ['ramp', 40, -190], ['gap', 20], ['flat', 18],
+                   ['dip', 50, 150], ['hill', 55, 190], ['gap', 22], ['flat', 18],
+                   ['ramp', 45, 190], ['gap', 20], ['flat', 20], ['hill', 90, 230],
+                   ['gap', 20], ['flat', 30], ['dip', 60, 120], ['flat', 70]],
+        },
+      ];
+    }
+
+    buildLevel(index) {
+      const maps = Sonic.MAPS;
+      this.mapIndex = ((index || 0) % maps.length + maps.length) % maps.length;
+      this.map = maps[this.mapIndex];
+
       const h = [];
-      const base = 300;
-      let y = base;
-
-      const flat = (len) => {
-        for (let i = 0; i < len; i++) h.push(y);
+      let y = 300;
+      const ops = {
+        flat: (len) => {
+          for (let i = 0; i < len; i++) h.push(y);
+        },
+        hill: (len, amp) => {
+          for (let i = 0; i < len; i++) h.push(y - Math.sin((i / len) * Math.PI) * amp);
+        },
+        dip: (len, amp) => {
+          for (let i = 0; i < len; i++) h.push(y + Math.sin((i / len) * Math.PI) * amp);
+        },
+        ramp: (len, dy) => {
+          const from = y;
+          for (let i = 0; i < len; i++) h.push(from + (dy * (1 - Math.cos((i / len) * Math.PI))) / 2);
+          y = from + dy;
+        },
+        gap: (len) => {
+          for (let i = 0; i < len; i++) h.push(PIT);
+        },
       };
-      const hill = (len, amp) => {
-        for (let i = 0; i < len; i++) h.push(y - Math.sin((i / len) * Math.PI) * amp);
-      };
-      const dip = (len, amp) => {
-        for (let i = 0; i < len; i++) h.push(y + Math.sin((i / len) * Math.PI) * amp);
-      };
-      const ramp = (len, dy) => {
-        const from = y;
-        for (let i = 0; i < len; i++) {
-          h.push(from + (dy * (1 - Math.cos((i / len) * Math.PI))) / 2);
-        }
-        y = from + dy;
-      };
-      const gap = (len) => {
-        for (let i = 0; i < len; i++) h.push(PIT);
-      };
-
-      flat(60);
-      hill(70, 90);
-      flat(20);
-      dip(60, 70);
-      flat(15);
-      hill(90, 150); // разгонная горка
-      flat(20);
-      gap(14);
-      flat(30);
-      ramp(50, -110); // подъём на верхний ярус
-      flat(30);
-      hill(60, 70);
-      dip(70, 90);
-      flat(20);
-      gap(16);
-      flat(25);
-      hill(110, 190); // главный трамплин
-      flat(20);
-      ramp(60, 120); // спуск обратно
-      dip(80, 110);
-      flat(25);
-      gap(18);
-      flat(30);
-      hill(80, 120);
-      flat(30);
-      dip(60, 60);
-      hill(70, 100);
-      flat(80);
+      for (const [op, ...args] of this.map.script) ops[op](...args);
 
       this.h = h;
       this.levelW = h.length * STEP;
-
-      // кольца, пружины, шипы и враги расставляются по готовому рельефу
-      this.rings = 0;
       this.ringList = [];
       this.springs = [];
       this.spikes = [];
@@ -118,11 +163,8 @@
         const x = i * STEP;
         const gy = this.heightAt(x);
         if (gy >= PIT) continue;
-        // дуга колец над каждой горкой и цепочка на прямых
         const above = this.heightAt(x - 40) - gy;
-        if (above > 12 || i % 24 === 0) {
-          this.ringList.push({ x: x, y: gy - 46, taken: false });
-        }
+        if (above > 12 || i % 24 === 0) this.ringList.push({ x: x, y: gy - 46, taken: false });
       }
 
       const place = (frac, arr, extra) => {
@@ -132,10 +174,11 @@
         arr.push(Object.assign({ x: x, y: gy }, extra || {}));
       };
       [0.16, 0.42, 0.68].forEach((f) => place(f, this.springs, { phase: 0 }));
-      [0.24, 0.35, 0.55, 0.74, 0.86].forEach((f) => place(f, this.spikes));
-      [0.2, 0.3, 0.46, 0.6, 0.72, 0.82, 0.9].forEach((f) =>
-        place(f, this.badniks, { dir: -1, phase: Math.random() * 6, alive: true })
-      );
+      // с номером карты опасностей становится больше
+      const hazards = [0.24, 0.35, 0.55, 0.74, 0.86].slice(0, 3 + this.mapIndex);
+      hazards.forEach((f) => place(f, this.spikes));
+      const foes = [0.2, 0.3, 0.46, 0.6, 0.72, 0.82, 0.9].slice(0, 4 + this.mapIndex);
+      foes.forEach((f) => place(f, this.badniks, { dir: -1, phase: Math.random() * 6, alive: true }));
     }
 
     heightAt(x) {
@@ -163,6 +206,7 @@
       this.g.setInfo({
         rings: this.rings,
         lives: '❤'.repeat(Math.max(0, this.lives)) || '—',
+        zone: this.level + 1 + '/' + Sonic.MAPS.length,
         time: this.time.toFixed(1),
       });
     }
@@ -204,13 +248,6 @@
         }
 
         if (crouch && Math.abs(this.vx) > 90) this.rolling = true;
-
-        if (g.pressed('action') || (g.held('up') && !this.jumpHeld)) {
-          this.vy = -JUMP;
-          this.onGround = false;
-          this.rolling = false;
-          this.g.sfx('bounce');
-        }
       } else {
         this.vy += GRAVITY * dt;
         if (dir && !this.rolling) {
@@ -218,7 +255,19 @@
           this.vx += dir * ACCEL * 0.55 * dt;
         }
       }
-      this.jumpHeld = g.held('up');
+      // Прыжок принимаем с пробела, стрелки вверх и W, с буфером и
+      // «койот-таймом»: иначе на склоне нажатие часто теряется.
+      if (g.pressed('action') || g.pressed('up')) this.jumpBuffer = 0.13;
+      this.jumpBuffer = Math.max(0, this.jumpBuffer - dt);
+      this.coyote = this.onGround ? 0.1 : Math.max(0, this.coyote - dt);
+      if (this.jumpBuffer > 0 && this.coyote > 0) {
+        this.jumpBuffer = 0;
+        this.coyote = 0;
+        this.vy = -JUMP;
+        this.onGround = false;
+        this.rolling = false;
+        this.g.sfx('bounce');
+      }
 
       const cap = this.rolling ? TOP_SPEED * 1.5 : TOP_SPEED;
       this.vx = Arcade.clamp(this.vx, -cap, cap);
@@ -360,22 +409,37 @@
     }
 
     finish() {
-      this.finished = true;
       const timeBonus = Math.max(0, Math.round((120 - this.time) * 50));
       this.g.addScore(1000 + this.rings * 100 + timeBonus);
       this.g.sfx('fanfare');
-      this.g.gameOver({
-        won: true,
-        message: Arcade.t('finishedIn', { n: this.time.toFixed(1) }),
-      });
+      this.g.shake(10);
+
+      if (this.level >= Sonic.MAPS.length - 1) {
+        this.finished = true;
+        this.g.gameOver({ won: true, message: Arcade.t('allZonesCleared') });
+        return;
+      }
+      // следующая зона: кольца обнуляются, время идёт заново
+      this.level += 1;
+      this.buildLevel(this.level);
+      this.x = 120;
+      this.y = this.heightAt(120) - BODY;
+      this.vx = 0;
+      this.vy = 0;
+      this.onGround = true;
+      this.rolling = false;
+      this.rings = 0;
+      this.time = 0;
+      this.zoneFlash = 2;
+      this.syncInfo();
     }
 
     /* ---------------- отрисовка ---------------- */
 
     draw(ctx) {
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#0ea5e9');
-      sky.addColorStop(1, '#a5f3fc');
+      sky.addColorStop(0, this.map.sky[0]);
+      sky.addColorStop(1, this.map.sky[1]);
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, W, H);
 
@@ -390,7 +454,7 @@
         ctx.arc(x - 22, y + 6, 16, 0, 7);
         ctx.fill();
       }
-      ctx.fillStyle = '#166534';
+      ctx.fillStyle = this.map.hills;
       for (let i = 0; i < 12; i++) {
         const x = ((i * 190 - this.camX * 0.35) % (W + 380)) - 190;
         ctx.beginPath();
@@ -429,13 +493,13 @@
         for (const [x, y] of run) ctx.lineTo(x, y);
         ctx.lineTo(run[run.length - 1][0], H + 10);
         ctx.closePath();
-        ctx.fillStyle = '#3f6212';
+        ctx.fillStyle = this.map.ground;
         ctx.fill();
         // травяная кромка
         ctx.beginPath();
         ctx.moveTo(run[0][0], run[0][1]);
         for (const [x, y] of run) ctx.lineTo(x, y);
-        ctx.strokeStyle = '#65a30d';
+        ctx.strokeStyle = this.map.grass;
         ctx.lineWidth = 9;
         ctx.stroke();
         run = [];
@@ -604,6 +668,13 @@
         ctx.fillStyle = '#22d3ee';
         ctx.fillText(Arcade.t('rolling'), 220, H - 15);
       }
+      if (this.zoneFlash > 0) {
+        this.zoneFlash -= 1 / 60;
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 28px ui-monospace, Menlo, monospace';
+        ctx.fillStyle = '#f8fafc';
+        ctx.fillText(Arcade.t('zoneN', { n: this.level + 1 }), W / 2, H / 2 - 30);
+      }
     }
   }
 
@@ -633,16 +704,14 @@
       s.rings = Math.max(s.rings, 5);
       s.lives = Math.max(s.lives, 2);
 
-      // добежав до финиша, начинаем круг заново, чтобы демо не замирало
-      if (s.x >= s.goalX - 20) {
+      // финиш сам переносит на следующую зону; на последней зацикливаемся
+      if (s.finished) {
+        s.finished = false;
+        s.level = 0;
+        s.buildLevel(0);
         s.x = 120;
         s.y = s.heightAt(120) - 26;
         s.vx = 0;
-        s.vy = 0;
-        s.time = 0;
-        s.finished = false;
-        s.ringList.forEach((r) => (r.taken = false));
-        s.badniks.forEach((b) => (b.alive = true));
       }
     },
   });

@@ -26,11 +26,47 @@
 
   const POWERS = ['spread', 'shield', 'life'];
 
+  const SAVE_KEY = 'gamesio:planes:upgrades:v1';
+  const MAX_WEAPON = 4;
+  const MAX_ARMOR = 2;
+
+  /* Улучшения переживают перезапуск: за каждого сбитого босса выдаётся
+     уровень оружия, за каждого третьего — броня. Так вторая партия начинается
+     сильнее первой, и смысл возвращаться в игру появляется сам собой. */
+  function loadUpgrades() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(SAVE_KEY)) || {};
+      return {
+        weapon: Arcade.clamp(raw.weapon || 1, 1, MAX_WEAPON),
+        armor: Arcade.clamp(raw.armor || 0, 0, MAX_ARMOR),
+        bosses: raw.bosses || 0,
+      };
+    } catch (_) {
+      return { weapon: 1, armor: 0, bosses: 0 };
+    }
+  }
+  function saveUpgrades(u) {
+    try {
+      localStorage.setItem(SAVE_KEY, JSON.stringify(u));
+    } catch (_) {}
+  }
+
+  /* Местность меняется после каждого босса: пять зон по кругу */
+  const ZONES = [
+    { name: 'night', sky: ['#0b1a3a', '#071021'], cloud: 'rgba(226,232,240,' },
+    { name: 'dawn', sky: ['#7c2d12', '#1e1b4b'], cloud: 'rgba(254,215,170,' },
+    { name: 'sea', sky: ['#0c4a6e', '#082f49'], cloud: 'rgba(186,230,253,' },
+    { name: 'desert', sky: ['#78350f', '#451a03'], cloud: 'rgba(253,230,138,' },
+    { name: 'space', sky: ['#1e1b4b', '#020617'], cloud: 'rgba(196,181,253,' },
+  ];
+
   class Planes {
     constructor(g) {
       this.g = g;
+      this.up = loadUpgrades();
       this.player = { x: W / 2, y: H - 80, vx: 0, invuln: 1.2, shield: 0 };
-      this.lives = 3;
+      this.lives = 3 + this.up.armor;
+      this.zone = 0;
       this.wave = 0;
       this.spread = 0;
       this.bullets = [];
@@ -59,6 +95,7 @@
       this.g.setInfo({
         lives: '❤'.repeat(Math.max(0, this.lives)) || '—',
         wave: this.wave,
+        weapon: 'lvl ' + this.up.weapon + (this.spread > 0 ? '+' : ''),
       });
     }
 
@@ -187,7 +224,7 @@
       this.fireCooldown -= dt;
       if (this.fireCooldown <= 0) {
         this.fire();
-        this.fireCooldown = FIRE_RATE;
+        this.fireCooldown = FIRE_RATE * (1 - (this.up.weapon - 1) * 0.08);
       }
       this.spread = Math.max(0, this.spread - dt);
     }
@@ -195,10 +232,20 @@
     fire() {
       const p = this.player;
       const add = (vx, vy, x) => this.bullets.push({ x: x, y: p.y - 16, vx: vx, vy: vy });
+      // Уровень оружия постоянный, бонус на разброс — временный поверх него
+      const level = Math.min(MAX_WEAPON, this.up.weapon + (this.spread > 0 ? 1 : 0));
       add(0, BULLET_SPEED, p.x);
-      if (this.spread > 0) {
-        add(-150, BULLET_SPEED * 0.94, p.x - 6);
-        add(150, BULLET_SPEED * 0.94, p.x + 6);
+      if (level >= 2) {
+        add(0, BULLET_SPEED, p.x - 11);
+        add(0, BULLET_SPEED, p.x + 11);
+      }
+      if (level >= 3) {
+        add(-170, BULLET_SPEED * 0.93, p.x - 7);
+        add(170, BULLET_SPEED * 0.93, p.x + 7);
+      }
+      if (level >= 4) {
+        add(-300, BULLET_SPEED * 0.82, p.x - 9);
+        add(300, BULLET_SPEED * 0.82, p.x + 9);
       }
       this.g.sfx('blip');
     }
@@ -255,7 +302,18 @@
         life: 0.6,
         size: 4,
       });
-      if (e.kind === 'boss') this.bossAlive = false;
+      if (e.kind === 'boss') {
+        this.bossAlive = false;
+        this.up.bosses += 1;
+        if (this.up.weapon < MAX_WEAPON) {
+          this.up.weapon += 1;
+          this.upgradeFlash = 2.5;
+        }
+        if (this.up.bosses % 3 === 0 && this.up.armor < MAX_ARMOR) this.up.armor += 1;
+        saveUpgrades(this.up);
+        this.zone = (this.zone + 1) % ZONES.length;
+        this.syncInfo();
+      }
       if (Math.random() < (e.kind === 'boss' ? 1 : 0.12)) this.dropPower(e.x, e.y);
     }
 
@@ -379,14 +437,15 @@
     /* ---------------- отрисовка ---------------- */
 
     draw(ctx) {
+      const z = ZONES[this.zone];
       const sky = ctx.createLinearGradient(0, 0, 0, H);
-      sky.addColorStop(0, '#0b1a3a');
-      sky.addColorStop(1, '#071021');
+      sky.addColorStop(0, z.sky[0]);
+      sky.addColorStop(1, z.sky[1]);
       ctx.fillStyle = sky;
       ctx.fillRect(0, 0, W, H);
 
       for (const c of this.clouds) {
-        ctx.fillStyle = `rgba(226,232,240,${c.a})`;
+        ctx.fillStyle = z.cloud + c.a + ')';
         ctx.beginPath();
         ctx.arc(c.x, c.y, c.r, 0, 7);
         ctx.fill();
@@ -511,6 +570,14 @@
           ctx.fillStyle = '#a78bfa';
           ctx.fillText(Arcade.t('bossIncoming'), W / 2, H / 2 + 12);
         }
+      }
+      if (this.upgradeFlash > 0) {
+        this.upgradeFlash -= 1 / 60;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = 'bold 20px ui-monospace, Menlo, monospace';
+        ctx.fillStyle = '#4ade80';
+        ctx.fillText(Arcade.t('weaponUp', { n: this.up.weapon }), W / 2, H / 2 + 60);
       }
       if (this.spread > 0) {
         ctx.textAlign = 'left';

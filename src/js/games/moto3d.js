@@ -40,9 +40,10 @@
     playerSprite: 'bike_player',
     playerScale: 1.9,
     topKmh: 300,
-    startTime: 62,
-    checkpointBonus: 22,
-    checkpointEvery: 0.25,
+    startTime: 42,
+    checkpointBonus: 11, // раньше 22 — времени копилось столько,
+    // что таймер переставал быть ограничением и гонка теряла смысл
+    checkpointEvery: 0.2,
     tuning: {
       maxSpeed: MAX,
       accel: MAX / 4.2,
