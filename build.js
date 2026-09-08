@@ -28,6 +28,22 @@ const dist = path.join(root, 'dist');
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const locales = Object.keys(SITE.locales);
 
+// Файл в src/js/games/, забытый в SCRIPTS (src/content.js), не ломает сборку —
+// он просто никогда не читается, и игра тихо выпадает из витрины без единой
+// ошибки. Ловим это здесь явно, а не полагаемся на то, что кто-то заметит
+// отсутствующую страницу.
+const gameFiles = fs
+  .readdirSync(path.join(root, 'src/js/games'))
+  .filter((f) => f.endsWith('.js'))
+  .map((f) => `src/js/games/${f}`);
+const unregistered = gameFiles.filter((f) => !SCRIPTS.includes(f));
+if (unregistered.length) {
+  console.error(
+    `Игра(ы) есть в src/js/games/, но не подключены через SCRIPTS в src/content.js: ${unregistered.join(', ')}`
+  );
+  process.exit(1);
+}
+
 function write(relPath, content) {
   const full = path.join(docs, relPath);
   fs.mkdirSync(path.dirname(full), { recursive: true });
